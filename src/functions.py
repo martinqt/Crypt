@@ -42,6 +42,18 @@ def charCount(string):
     
     return tmp
 
+#return the list of the chars present in the string
+def charList(string):
+    chars = list()
+
+    for char in string:
+        if char in chars:
+            continue
+        else:
+            chars.append(char)
+
+    return chars
+
 #write the char count into a file
 def writeCharCount(string):
     split = asort(charCount(string))

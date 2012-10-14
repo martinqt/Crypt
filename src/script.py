@@ -5,8 +5,7 @@ from key import *
 #the encrypted message
 content = read('input.txt')
 #the chars in the message
-#@todo: make it dynamic
-charList = ['f', 'u', 'j', ',', ';', 'q', 'p', 's', ' ', 'e', 'g', 'z', '\'', 'l', 'x', 'd', 'k', '.', 'h', 'c', 'b', 'v', 'a']
+charList = charList(content)
 #list of the possible groups
 groups = product(''.join(charList), repeat=2)
 
