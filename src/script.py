@@ -19,7 +19,7 @@ sortedGroups = getSortedGroupsCount(content, groups)
 for i, j in sortedGroups:
     append('groups.txt', '\n'+str(i)+' => '+str(j))
 
-append('../groups.txt', '\n \n'+str(len(sortedGroups))+' groups')
+append('groups.txt', '\n \n'+str(len(sortedGroups))+' groups')
 
 #replacing chars using the key
 result = content.translate(str.maketrans(replaceDict))
