@@ -4,13 +4,6 @@ from operator import itemgetter
 def asort(d):
      return sorted(d.items(), key=lambda x: x[1])[::-1]
 
-#sort a list of nested list
-def lsort(l):
-    sort_key = lambda s: (-len(s), s)
-    l.sort(key=sort_key)
-
-    return l
-
 #write the content into the file
 def write(file, content):
     file = open(file, 'w')
