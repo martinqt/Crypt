@@ -24,8 +24,12 @@ def append(file, content):
     file.write(content)
     file.close()
 
+#shortcut of write(file, '')
+def clear(file):
+    write(file, '')
+
 #count the number of each char in the string
-def charCount(string):
+def getCharCount(string):
     tmp = {}
     for i in string:
         if i in tmp:
@@ -36,7 +40,7 @@ def charCount(string):
     return tmp
 
 #return the list of the chars present in the string
-def charList(string):
+def getCharList(string):
     chars = list()
 
     for char in string:
@@ -48,31 +52,31 @@ def charList(string):
     return chars
 
 #write the char count into a file
-def writeCharCount(string):
-    split = asort(charCount(string))
+def writeCharCount(string, file = 'chars.txt'):
+    split = asort(getCharCount(string))
     content = ''
     for key, value in split:
         content += '\n'+str(key)+' => '+str(value)
     
-    write('chars.txt', content)
+    write(file, content)
 
-#transform the key to generate a colored html output
+#transform the key value to generate a colored html output
 def htmlFormatDict(dict):
     for i in dict:
         dict[i] = '<span style="color: red;">'+dict[i]+'</span>'
 
     return dict
 
-#sort the result of groupsCount()
+#get the sorted result of getGroupsCount()
 def getSortedGroupsCount(content, groups):
     tmpGroups = list()
-    for i,j in list(groupsCount(content, groups)):
+    for i,j in list(getGroupsCount(content, groups)):
         tmpGroups.append([i, j])
 
     return sorted(tmpGroups, key=itemgetter(1))[::-1]
 
 #count the number of each group
-def groupsCount(content, groups):
+def getGroupsCount(content, groups):
     for elmt in groups:
         group = ''.join(elmt)
         result = content.count(group)

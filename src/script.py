@@ -3,9 +3,9 @@ from itertools import product
 from key import *
 
 #the encrypted message
-content = read('input.txt')
+input = read('input.txt')
 #the chars in the message
-charList = charList(content)
+charList = getCharList(input)
 #list of the possible groups
 groups = product(''.join(charList), repeat=2)
 
@@ -13,8 +13,8 @@ groups = product(''.join(charList), repeat=2)
 replaceDict = getKey()
 
 #counting groups
-write('groups.txt', '')
-sortedGroups = getSortedGroupsCount(content, groups)
+clear('groups.txt')
+sortedGroups = getSortedGroupsCount(input, groups)
 
 for i, j in sortedGroups:
     append('groups.txt', '\n'+str(i)+' => '+str(j))
@@ -22,11 +22,11 @@ for i, j in sortedGroups:
 append('groups.txt', '\n \n'+str(len(sortedGroups))+' groups')
 
 #replacing chars using the key
-result = content.translate(str.maketrans(replaceDict))
+result = input.translate(str.maketrans(replaceDict))
 
 #generate html output
-htmlResult = content+'<hr/>'
-htmlResult += content.translate(str.maketrans(htmlFormatDict(replaceDict)))
+htmlResult = input+'<hr/>'
+htmlResult += input.translate(str.maketrans(htmlFormatDict(replaceDict)))
 
 #print output in the console
 print(result)
@@ -34,4 +34,4 @@ print(result)
 #write output
 write('output.txt', result)
 write('output.html', htmlResult)
-writeCharCount(content)
+writeCharCount(input)
