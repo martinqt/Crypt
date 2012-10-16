@@ -83,3 +83,15 @@ def getGroupsCount(content, groups):
 
         if result != 0:
             yield [group, result]
+
+#generate and write groups analysis
+def doGroupsAnalysis(input, groups, file = 'groups.txt'):
+    #counting groups
+    clear(file)
+    sortedGroups = getSortedGroupsCount(input, groups)
+
+    for i, j in sortedGroups:
+        append(file, '\n'+str(i)+' => '+str(j))
+
+    append(file, '\n \n'+str(len(sortedGroups))+' groups')
+
