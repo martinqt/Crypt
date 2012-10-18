@@ -30,30 +30,29 @@ def clear(file):
 
 #count the number of each char in the string
 def getCharCount(string):
-    tmp = {}
+    tmp = dict()
     for i in string:
-        if i in tmp:
-            tmp[i] += 1
-        else:
-            tmp[i] = 1
+        if not i in tmp:
+            tmp[i] = string.count(i)
     
     return tmp
 
 #return the list of the chars present in the string
-def getCharList(string):
+def getCharList(input):
     chars = list()
 
-    for char in string:
+    for char in input:
         if char in chars:
             continue
         else:
-            chars.append(char)
+            if char == char:
+                chars.append(char)
 
     return chars
 
 #write the char count into a file
-def writeCharCount(string, file = 'chars.txt'):
-    split = asort(getCharCount(string))
+def writeCharCount(input, file = 'chars.txt'):
+    split = asort(getCharCount(input))
     content = ''
     for key, value in split:
         content += '\n'+str(key)+' => '+str(value)
