@@ -42,9 +42,15 @@ def writeCharCount(input, file = 'chars.txt'):
     write(file, content)
 
 #transform the key value to generate a colored html output
-def htmlFormatDict(dict):
+def htmlFormatDict(dict, smart = True):
     for i in dict:
-        dict[i] = '<span style="color: red;">'+dict[i]+'</span>'
+        if smart and dict[i] == '-':
+            if i == ' ':
+                dict[i] = '<span style="color: red;">@</span>'
+            else:
+                dict[i] = '<span style="color: red;">'+i+'</span>'
+        else:
+            dict[i] = '<span style="color: green;">'+dict[i]+'</span>'
 
     return dict
 
