@@ -11,6 +11,7 @@ def asort(d):
 #count the number of each char in the string
 def getCharCount(string):
     tmp = dict()
+    
     for i in string:
         if not i in tmp:
             tmp[i] = string.count(i)
@@ -34,6 +35,7 @@ def getCharList(input):
 def writeCharCount(input, file = 'chars.txt'):
     split = asort(getCharCount(input))
     content = ''
+
     for key, value in split:
         content += '\n'+str(key)+' => '+str(value)
     
@@ -49,6 +51,7 @@ def htmlFormatDict(dict):
 #get the sorted result of getGroupsCount()
 def getSortedGroupsCount(content, groups):
     tmpGroups = list()
+
     for i,j in list(getGroupsCount(content, groups)):
         tmpGroups.append([i, j])
 
