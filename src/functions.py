@@ -1,32 +1,12 @@
 from operator import itemgetter
+import os
+import sys
+sys.path.insert(0, os.getcwd()+'/src/functions')
+from file import *
 
 #sort an array, keeping the key => value association
 def asort(d):
      return sorted(d.items(), key=lambda x: x[1])[::-1]
-
-#write the content into the file
-def write(file, content):
-    file = open(file, 'w')
-    file.write(content)
-    file.close()
-
-#read the content of the file
-def read(file):
-    file = open(file, 'r')
-    content = file.read()
-    file.close()
-    
-    return content
-
-#append content to a file
-def append(file, content):
-    file = open(file, 'a+')
-    file.write(content)
-    file.close()
-
-#shortcut of write(file, '')
-def clear(file):
-    write(file, '')
 
 #count the number of each char in the string
 def getCharCount(string):

@@ -1,6 +1,11 @@
 from functions import *
 from itertools import product
 from key import *
+import os
+import sys
+sys.path.insert(0, os.getcwd()+'/src/functions')
+from file import *
+
 
 #the encrypted message
 input = read('input.txt')
