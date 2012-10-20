@@ -1,11 +1,11 @@
 from subprocess import *
 import os, time
 
-#get the python files in a dir
-def getPyFiles(path = 'src'):
-	for elmt in os.listdir(path):
-		if elmt.endswith(".py"):
-			yield [elmt, getModificationTime('src/'+elmt)]
+def getPyFiles(paths = ['src', 'src/functions']):
+	for dir in paths:
+		for elmt in os.listdir(dir):
+			if elmt.endswith(".py"):
+				yield [dir+'/'+elmt, getModificationTime(dir+'/'+elmt)]
 
 #get the modification yime of the file
 def getModificationTime(file):
@@ -27,17 +27,17 @@ def fileWatcher():
 	
 	while 1:
 		for elmt in files:
-			if elmt[1] != getModificationTime('src/'+elmt[0]):
-				if str(elmt[0]) == 'watcher.py':
+			if elmt[1] != getModificationTime(elmt[0]):
+				if str(elmt[0]) == 'src/watcher.py':
 					print('********** Please restart the watcher \n \n')
-					elmt[1] = getModificationTime('src/'+elmt[0])
+					elmt[1] = getModificationTime(elmt[0])
 
 				else:
 					print('***** Processing *****')
 					call(['python', 'src/script.py'])				
 					print('***** End ***** \n')
 
-					elmt[1] = getModificationTime('src/'+elmt[0])
+					elmt[1] = getModificationTime(elmt[0])
 					sleepy = 0
 
 					break
