@@ -94,3 +94,6 @@ def doGroupsAnalysis(input, groups, file = 'groups.txt'):
 
     append(file, '\n \n'+str(len(sortedGroups))+' groups')
 
+#apply the dict to the input
+def transform(input, replaceDict):
+    return input.translate(str.maketrans(replaceDict))

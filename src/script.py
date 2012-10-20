@@ -15,11 +15,11 @@ replaceDict = getKey()
 doGroupsAnalysis(input, groups)
 
 #replacing chars using the key
-result = input.translate(str.maketrans(replaceDict))
+result = transform(input, replaceDict)
 
 #generate html output
 htmlResult = input+'<hr/>'
-htmlResult += input.translate(str.maketrans(htmlFormatDict(replaceDict)))
+htmlResult += transform(input, htmlFormatDict(replaceDict))
 
 #print output in the console
 print(result)
