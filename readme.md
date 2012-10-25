@@ -2,7 +2,7 @@ Crypt
 =====
 
 This is a small helper for decryption project. It's also my first python script so any comment on the
-way of using python is welcome.
+way of using it is welcome.
 
 Installing
 ----------
@@ -12,8 +12,8 @@ Go to http://www.python.org/download/ and get, at least, the 3.0 version.
 Using it
 --------
 
-To use it, simply run ``watcher.bat`` to run the watcher. If you have an error telling that python is not defined, 
-you'll need to edit the ``watcher.bat`` file and replace ``python`` by the complete path to python binary, for instance
+To use it, simply run ``watcher.bat`` to run the watcher. If you have an error telling you that python is not defined, 
+you'll need to edit the ``watcher.bat`` file and replace ``python`` by the complete path to python the binary, for instance
 ``C:\Python33\python``.
 
 Any change in one of the ``*.py`` file will trigger the generation.
