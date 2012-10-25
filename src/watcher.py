@@ -1,5 +1,5 @@
 from subprocess import *
-import os, time
+import os, time, sys
 
 #get the python files in a dir
 def getPyFiles(paths = ['src', 'src/functions']):
@@ -22,6 +22,12 @@ def printSleepy():
 
 #the main method
 def fileWatcher():
+	frequency = False
+
+	for arg in sys.argv:
+		if arg == '--frequency':
+			frequency = True
+
 	files = list(getPyFiles())
 	
 	sleepy = 0
@@ -35,7 +41,12 @@ def fileWatcher():
 
 				else:
 					print('***** Processing *****')
-					call(['python', 'src/script.py'])				
+					
+					if frequency:
+						call(['python', 'src/script.py', '--frequency'])
+					else:
+						call(['python', 'src/script.py'])
+
 					print('***** End ***** \n')
 
 					elmt[1] = getModificationTime(elmt[0])
