@@ -1,6 +1,7 @@
 from subprocess import *
 import os, time
 
+#get the python files in a dir
 def getPyFiles(paths = ['src', 'src/functions']):
 	for dir in paths:
 		for elmt in os.listdir(dir):
@@ -42,9 +43,10 @@ def fileWatcher():
 
 					break
 			else:
+				files = list(getPyFiles())
 				sleepy += 1
 
-		if sleepy > 120:
+		if sleepy > 2400:
 			sleepy = 0
 			printSleepy()
 
