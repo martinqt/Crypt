@@ -40,6 +40,7 @@ def getCharList(input):
 def writeCharCount(input, frequency = False, file = 'chars.txt'):
     split = asort(getCharCount(input, frequency))
     content = ''
+
     for key, value in split:
         content += '\n'+str(key)+' => '+str(value)
     
@@ -71,6 +72,7 @@ def getSortedGroupsCount(content, groups, frequency = False):
 def getGroupsCount(content, groups, frequency = False):
     for elmt in groups:
         group = ''.join(elmt)
+
         if not frequency:
             result = content.count(group)
         else:
@@ -81,7 +83,6 @@ def getGroupsCount(content, groups, frequency = False):
 
 #generate and write groups analysis
 def doGroupsAnalysis(input, groups, frequency = False, file = 'groups.txt'):
-    #counting groups
     clear(file)
     sortedGroups = getSortedGroupsCount(input, groups, frequency)
 
