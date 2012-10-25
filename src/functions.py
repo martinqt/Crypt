@@ -1,10 +1,10 @@
 from operator import itemgetter
 from collections import deque
 from wordList import *
-import os
-import sys
+import os, sys
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from file import *
+from group import *
 
 #sort an array, keeping the key => value association
 def asort(d):
@@ -51,45 +51,13 @@ def htmlFormatDict(dict, smart = True):
     for i in dict:
         if smart and dict[i] == '-':
             if i == ' ':
-                dict[i] = '<span style="color: red;">@</span>'
+                dict[i] = '<span style="color: red;">-</span>'
             else:
                 dict[i] = '<span style="color: red;">'+i+'</span>'
         else:
             dict[i] = '<span style="color: green;">'+dict[i]+'</span>'
 
     return dict
-
-#get the sorted result of getGroupsCount()
-def getSortedGroupsCount(content, groups, frequency = False):
-    tmpGroups = list()
-
-    for i,j in list(getGroupsCount(content, groups, frequency)):
-        tmpGroups.append([i, j])
-
-    return sorted(tmpGroups, key=itemgetter(1))[::-1]
-
-#count the number of each group
-def getGroupsCount(content, groups, frequency = False):
-    for elmt in groups:
-        group = ''.join(elmt)
-
-        if not frequency:
-            result = content.count(group)
-        else:
-            result = content.count(group)/len(content)
-
-        if result != 0:
-            yield [group, result]
-
-#generate and write groups analysis
-def doGroupsAnalysis(input, groups, frequency = False, file = 'groups.txt'):
-    clear(file)
-    sortedGroups = getSortedGroupsCount(input, groups, frequency)
-
-    for i, j in sortedGroups:
-        append(file, '\n'+str(i)+' => '+str(j))
-
-    append(file, '\n \n'+str(len(sortedGroups))+' groups')
 
 #apply the dict to the input
 def transform(input, replaceDict):

@@ -2,8 +2,6 @@ from functions import *
 from itertools import product
 from key import *
 import os, sys
-sys.path.insert(0, os.getcwd()+'/src/functions')
-from file import *
 
 frequency = False
 
