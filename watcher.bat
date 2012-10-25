@@ -1,1 +1,1 @@
-C:\Python33\python src/watcher.py
+python src/watcher.py %1 

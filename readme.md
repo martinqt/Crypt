@@ -12,8 +12,9 @@ Go to http://www.python.org/download/ and get, at least, the 3.0 version.
 Using it
 --------
 
-To use it, simply run ``watcher.bat`` to run the watcher. If you have not installed python 
-to the default location, you'll need to edit the ``watcher.bat`` file and replace ``C:\Python33\python``
+To use it, simply run ``watcher.bat`` to run the watcher. If you have an error telling that python is not defined, 
+you'll need to edit the ``watcher.bat`` file and replace ``python`` by the complete path to python binary, for instance
+``C:\Python33\python``.
 by tour python install dir. Any change in one of the ``*.py`` file will trigger the generation.
 
 This has been tested with the 3.3 version of python on a windows 7 laptop.
