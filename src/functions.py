@@ -4,7 +4,7 @@ from wordList import *
 import os, sys
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from file import *
-from group import *
+from groups import *
 
 #sort an array, keeping the key => value association
 def asort(d):
