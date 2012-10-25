@@ -1,4 +1,6 @@
 from operator import itemgetter
+from collections import deque
+from wordList import *
 import os
 import sys
 sys.path.insert(0, os.getcwd()+'/src/functions')
@@ -9,13 +11,16 @@ def asort(d):
      return sorted(d.items(), key=lambda x: x[1])[::-1]
 
 #count the number of each char in the string
-def getCharCount(string):
+def getCharCount(string, frequency = False):
     tmp = dict()
-    
+
     for i in string:
         if not i in tmp:
-            tmp[i] = string.count(i)
-    
+            if not frequency:
+                tmp[i] = string.count(i)
+            else:
+                tmp[i] = string.count(i)/len(string)
+
     return tmp
 
 #return the list of the chars present in the string
@@ -32,10 +37,9 @@ def getCharList(input):
     return chars
 
 #write the char count into a file
-def writeCharCount(input, file = 'chars.txt'):
-    split = asort(getCharCount(input))
+def writeCharCount(input, frequency = False, file = 'chars.txt'):
+    split = asort(getCharCount(input, frequency))
     content = ''
-
     for key, value in split:
         content += '\n'+str(key)+' => '+str(value)
     
@@ -55,28 +59,31 @@ def htmlFormatDict(dict, smart = True):
     return dict
 
 #get the sorted result of getGroupsCount()
-def getSortedGroupsCount(content, groups):
+def getSortedGroupsCount(content, groups, frequency = False):
     tmpGroups = list()
 
-    for i,j in list(getGroupsCount(content, groups)):
+    for i,j in list(getGroupsCount(content, groups, frequency)):
         tmpGroups.append([i, j])
 
     return sorted(tmpGroups, key=itemgetter(1))[::-1]
 
 #count the number of each group
-def getGroupsCount(content, groups):
+def getGroupsCount(content, groups, frequency = False):
     for elmt in groups:
         group = ''.join(elmt)
-        result = content.count(group)
+        if not frequency:
+            result = content.count(group)
+        else:
+            result = content.count(group)/len(content)
 
         if result != 0:
             yield [group, result]
 
 #generate and write groups analysis
-def doGroupsAnalysis(input, groups, file = 'groups.txt'):
+def doGroupsAnalysis(input, groups, frequency = False, file = 'groups.txt'):
     #counting groups
     clear(file)
-    sortedGroups = getSortedGroupsCount(input, groups)
+    sortedGroups = getSortedGroupsCount(input, groups, frequency)
 
     for i, j in sortedGroups:
         append(file, '\n'+str(i)+' => '+str(j))
