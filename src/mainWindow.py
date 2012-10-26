@@ -13,7 +13,10 @@ class Frame(QWidget):
         self.quit = QPushButton('Quit', self)
         self.quit.clicked.connect(quit)
 
+        self.keyEdit = QTableView(self)
+
         layout = QVBoxLayout()
+        layout.addWidget(self.keyEdit)
         layout.addWidget(self.quit)
         self.setLayout(layout)
 
