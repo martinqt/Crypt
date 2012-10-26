@@ -4,6 +4,11 @@ Crypt
 This is a small helper for decryption project. It's also my first python script so any comment on the
 way of using it is welcome.
 
+This has been tested with the 3.3 version of python on a windows 7 laptop.
+
+This is currently not intended to decrypt multiple messages but only the one in the input file. In the future it 
+might also crypt messages.
+
 Installing
 ----------
 
@@ -18,14 +23,12 @@ you'll need to edit the ``watcher.bat`` file and replace ``python`` by the compl
 
 Any change in one of the ``*.py`` file will trigger the generation.
 
-This has been tested with the 3.3 version of python on a windows 7 laptop.
-
-This is currently not intended to decrypt multiple messages but only the one in the input file. In the future it 
-might also crypt messages.
-
 Using it
 --------
 
 The characters statistics provide a count result by default, wich means it will print the number of time the characters were 
 encountred. If you want the frequency to be outputed in place of a simple count, just add ``--frequency`` after your call to 
 the watcher or ``src/script.py`` file.
+
+You can't pass the ``--frequency`` option if you're double-cliking the bat file. You'll have to either edit this file and add the 
+parameter at the end of the line or call the bat file from the command line with the parameter.
