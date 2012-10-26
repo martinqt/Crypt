@@ -32,6 +32,6 @@ htmlResult += transform(input, htmlFormatDict(replaceDict))
 print(result)
 
 #write output
-write('output.txt', result)
-write('output.html', htmlResult)
+write('output/output.txt', result)
+write('output/output.html', htmlResult)
 writeCharCount(input, frequency)

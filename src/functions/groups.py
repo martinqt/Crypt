@@ -23,7 +23,7 @@ def getGroupsCount(content, groups, frequency = False):
             yield [group, result]
 
 #generate and write groups analysis
-def doGroupsAnalysis(input, groups, frequency = False, file = 'groups.txt'):
+def doGroupsAnalysis(input, groups, frequency = False, file = 'output/groups.txt'):
     clear(file)
     sortedGroups = getSortedGroupsCount(input, groups, frequency)
 

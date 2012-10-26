@@ -1,6 +1,5 @@
 from operator import itemgetter
 from collections import deque
-from wordList import *
 import os, sys
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from file import *
@@ -37,7 +36,7 @@ def getCharList(input):
     return chars
 
 #write the char count into a file
-def writeCharCount(input, frequency = False, file = 'chars.txt'):
+def writeCharCount(input, frequency = False, file = 'output/chars.txt'):
     split = asort(getCharCount(input, frequency))
     content = ''
 
