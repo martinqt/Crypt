@@ -2,11 +2,14 @@ from subprocess import *
 import os, time, sys
 
 #get the python files in a dir
-def getPyFiles(paths = ['src', 'src/functions']):
+def getPyFiles(paths = ['src', 'src/functions'], files = ['input.txt']):
 	for dir in paths:
 		for elmt in os.listdir(dir):
 			if elmt.endswith(".py"):
 				yield [dir+'/'+elmt, getModificationTime(dir+'/'+elmt)]
+
+	for file in files:
+		yield [file, getModificationTime(file)]
 
 #get the modification yime of the file
 def getModificationTime(file):
