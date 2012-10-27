@@ -74,11 +74,11 @@ class MainWindow(QMainWindow):
             charCount = getCharCount(read(self.inputPath))
 
         for i in key:
+            if charCount[i] < 10:
+                charCount[i] = '0'+str(charCount[i])
             index = self.model.rowCount()
             self.model.setItem(index, 0, QStandardItem(i))
             self.model.setItem(index, 1, QStandardItem(key[i]))
-            if charCount[i] < 10:
-                charCount[i] = '0'+str(charCount[i])
             self.model.setItem(index, 2, QStandardItem(str(charCount[i])))
 
         self.keyEdit.sortByColumn(2, Qt.DescendingOrder)
