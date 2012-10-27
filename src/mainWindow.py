@@ -1,11 +1,10 @@
-import sys
+import sys, os
+sys.path.insert(0, os.getcwd()+'/src/functions')
 from PySide.QtCore import *
 from PySide.QtGui import *
 from key import *
-import os, sys
-sys.path.insert(0, os.getcwd()+'/src/functions')
 from file import *
-
+from functions import *
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -14,15 +13,22 @@ class MainWindow(QMainWindow):
         self.resize(600, 500)
         self.setFont(QFont('Verdana')) 
         self.setWindowTitle('Crypt')
+        self.headers = ['From', 'To', 'Count/Frequency']
+        self.inputPath = 'input.txt'
+        self.keyPath = 'src/key.py'
 
         self.quit = QPushButton('Quit', self)
         self.quit.clicked.connect(quit)
+        self.populateButton = QPushButton('Repopulate', self)
+        self.populateButton.clicked.connect(self.populate)
 
         self.keyEdit = QTableView(self)
+        self.keyEdit.setSortingEnabled(True)
 
         widget = QWidget(self)
         layout = QVBoxLayout()
         layout.addWidget(self.keyEdit)
+        layout.addWidget(self.populateButton)
         layout.addWidget(self.quit)
         widget.setLayout(layout)
         self.setCentralWidget(widget)
@@ -31,8 +37,8 @@ class MainWindow(QMainWindow):
         header.setResizeMode(QHeaderView.Stretch)
         self.keyEdit.setHorizontalHeader(header)
         
-        self.model = QStandardItemModel(0, 2, self)
-        self.model.setHorizontalHeaderLabels(['From', 'To'])
+        self.model = QStandardItemModel(0, 3, self)
+        self.model.setHorizontalHeaderLabels(self.headers)
         self.keyEdit.setModel(self.model)
 
         self.statusBar().showMessage('Welcome')
@@ -43,18 +49,22 @@ class MainWindow(QMainWindow):
     def populate(self):
         self.clearModel()
         key = getKey()
+        charCount = getCharCount(read(self.inputPath))
 
         for i in key:
             index = self.model.rowCount()
             self.model.setItem(index, 0, QStandardItem(i))
             self.model.setItem(index, 1, QStandardItem(key[i]))
+            self.model.setItem(index, 2, QStandardItem(str(charCount[i])))
+
+        self.keyEdit.sortByColumn(0, Qt.AscendingOrder)
 
     def clearModel(self):
         self.model.clear();
-        self.model.setHorizontalHeaderLabels(['From', 'To'])
+        self.model.setHorizontalHeaderLabels(self.headers)
 
     def createMenu(self):
-        self.saveAct = QAction(QIcon(':/images/save.png'), 'Save',
+        self.saveAct = QAction(QIcon('src/images/save.png'), 'Save',
                 self, shortcut=QKeySequence.Save,
                 statusTip='Save the key', triggered=self.saveFile)
 
