@@ -115,7 +115,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage('Converted')
 
     def saveFile(self):
-        replace = asort(self.generateKey())
+        replace = asort(self.generateKey(), False, True)
         content = '''def getKey():
      return {\n'''
 

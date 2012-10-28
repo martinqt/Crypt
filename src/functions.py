@@ -6,11 +6,19 @@ from file import *
 from groups import *
 
 #sort a dict, keeping the key => value association
-def asort(dict, fromKey = False):
+def asort(dict, descending = True, fromKey = False):
      if not fromKey:
-        return sorted(dict.items(), key=lambda x: x[1])[::-1]
+        tmp = sorted(dict.items(), key=lambda x: x[1])
+        if descending:
+            return tmp[::-1]
+        else:
+            return tmp
      else:
-        return sorted(dict.items(), key=lambda x: x[1])[::-1]
+        tmp = sorted(dict.items(), key=lambda x: x[0])
+        if descending:
+            return tmp[::-1]
+        else:
+            return tmp
 
 #count the number of each char in the string
 def getCharCount(string, frequency = False):
