@@ -14,8 +14,9 @@ Installing
 
 Go to http://www.python.org/download/ and get, at least, the 3.0 version. 
 
-If you want to use the graphic interface, you'll also need to install PySide. Make sure to 
-downloed the version corresponding to your python installation.
+If you want to use the graphic interface, you'll also need to install PySide. Go to http://qt-project.org/wiki/PySideDownloads, 
+select your OS and then the PySide version corresponding to your Python version. The version is at the end of the filename, for 
+instance ``-py3.2`` or ``-py3.3``.
 
 Setting up
 ----------
