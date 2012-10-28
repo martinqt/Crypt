@@ -12,7 +12,10 @@ might also crypt messages.
 Installing
 ----------
 
-Go to http://www.python.org/download/ and get, at least, the 3.0 version.
+Go to http://www.python.org/download/ and get, at least, the 3.0 version. 
+
+If you want to use the graphic interface, you'll also need to install PySide. Make sure to 
+downloed the version corresponding to your python installation.
 
 Setting up
 ----------
@@ -23,7 +26,7 @@ you'll need to edit the ``watcher.bat`` file and replace ``python`` by the compl
 
 Any change in one of the ``*.py`` file will trigger the generation.
 
-Using it
+CLI Mode
 --------
 
 The characters statistics provide a count result by default, wich means it will print the number of time the characters were 
@@ -32,3 +35,9 @@ the watcher or ``src/script.py`` file.
 
 You can't pass the ``--frequency`` option if you're double-cliking the bat file. You'll have to either edit this file and add the 
 parameter at the end of the line or call the bat file from the command line with the parameter.
+
+GUI Mode
+--------
+
+To use the graphical interface, simply run the ``crypt.bat`` file on Windows or type ``python src/mainWindow.py`` in 
+a command prompt.
