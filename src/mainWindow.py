@@ -115,18 +115,18 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage('Converted')
 
     def saveFile(self):
+        replace = asort(self.generateKey())
         content = '''def getKey():
-    return {\n'''
+     return {\n'''
 
-        key = self.generateKey()
-        for i in key:
-            tmp = '        \''+self.escape(i)+'\' : '
-            tmp += '\''+key[i]+'\',\n'
+        for key, value in replace:
+            tmp = '          \''+self.escape(key)+'\' : '
+            tmp += '\''+value+'\',\n'
             content += tmp
 
-        content += '''    }'''
+        content += '''     }'''
 
-        write('src/key.py', content)
+        write(self.keyPath, content)
 
     def generateKey(self):
         key = dict()

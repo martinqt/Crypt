@@ -6,8 +6,11 @@ from file import *
 from groups import *
 
 #sort a dict, keeping the key => value association
-def sortDict(d):
-     return dict(sorted(d.items(), key=lambda x: x[1])[::-1])
+def asort(dict, fromKey = False):
+     if not fromKey:
+        return sorted(dict.items(), key=lambda x: x[1])[::-1]
+     else:
+        return sorted(dict.items(), key=lambda x: x[1])[::-1]
 
 #count the number of each char in the string
 def getCharCount(string, frequency = False):
@@ -37,11 +40,11 @@ def getCharList(input):
 
 #write the char count into a file
 def writeCharCount(input, frequency = False, file = 'output/chars.txt'):
-    split = sortDict(getCharCount(input, frequency))
+    split = asort(getCharCount(input, frequency))
     content = ''
 
-    for i in split:
-        content += '\n'+str(i)+' => '+str(split[i])
+    for key, value in split:
+        content += '\n'+str(key)+' => '+str(value)
     
     write(file, content)
 
