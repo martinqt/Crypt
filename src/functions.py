@@ -5,9 +5,9 @@ sys.path.insert(0, os.getcwd()+'/src/functions')
 from file import *
 from groups import *
 
-#sort an array, keeping the key => value association
-def asort(d):
-     return sorted(d.items(), key=lambda x: x[1])[::-1]
+#sort a dict, keeping the key => value association
+def sortDict(d):
+     return dict(sorted(d.items(), key=lambda x: x[1])[::-1])
 
 #count the number of each char in the string
 def getCharCount(string, frequency = False):
@@ -37,11 +37,11 @@ def getCharList(input):
 
 #write the char count into a file
 def writeCharCount(input, frequency = False, file = 'output/chars.txt'):
-    split = asort(getCharCount(input, frequency))
+    split = sortDict(getCharCount(input, frequency))
     content = ''
 
-    for key, value in split:
-        content += '\n'+str(key)+' => '+str(value)
+    for i in split:
+        content += '\n'+str(i)+' => '+str(split[i])
     
     write(file, content)
 
