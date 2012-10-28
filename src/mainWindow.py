@@ -112,6 +112,7 @@ class MainWindow(QMainWindow):
         key = self.generateKey()
 
         self.output.setText(transform(input, key))
+        self.statusBar().showMessage('Converted')
 
     def saveFile(self):
         content = '''def getKey():
