@@ -32,8 +32,8 @@ class MainWindow(QMainWindow):
         self.keyEdit.setSortingEnabled(True)
 
         widget = QWidget(self)
-        layout = QVBoxLayout()
-        hLayout = QHBoxLayout()
+        layout = QVBoxLayout(self)
+        hLayout = QHBoxLayout(self)
         hLayout.addWidget(self.keyEdit)
         hLayout.addWidget(self.output)
         layout.addLayout(hLayout)
@@ -52,7 +52,7 @@ class MainWindow(QMainWindow):
         self.keyEdit.setHorizontalHeader(header)
         
         self.model = QStandardItemModel(0, 3, self)
-        self.model.setHorizontalHeaderLabels(self.headers)
+        self.applyHeader()
         self.keyEdit.setModel(self.model)
 
         self.statusBar().showMessage('Welcome')
@@ -87,7 +87,7 @@ class MainWindow(QMainWindow):
 
     def clearModel(self):
         self.model.clear();
-        self.model.setHorizontalHeaderLabels(self.headers)
+        self.applyHeader()
 
     def createMenu(self):
         self.saveAct = QAction(QIcon('src/images/save.png'), 'Save',
@@ -103,8 +103,11 @@ class MainWindow(QMainWindow):
         else:
             self.headers[2] = 'Count'
 
-        self.model.setHorizontalHeaderLabels(self.headers)
+        self.applyHeader()
         self.populate()
+
+    def applyHeader(self):
+        self.model.setHorizontalHeaderLabels(self.headers)
 
     def convert(self):
         self.saveFile()
