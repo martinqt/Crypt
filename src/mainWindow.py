@@ -32,8 +32,8 @@ class MainWindow(QMainWindow):
         self.keyEdit.setSortingEnabled(True)
 
         widget = QWidget(self)
-        layout = QVBoxLayout(self)
-        hLayout = QHBoxLayout(self)
+        layout = QVBoxLayout()
+        hLayout = QHBoxLayout()
         hLayout.addWidget(self.keyEdit)
         hLayout.addWidget(self.output)
         layout.addLayout(hLayout)
