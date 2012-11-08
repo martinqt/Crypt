@@ -18,6 +18,6 @@ def append(file, content):
     file.write(content)
     file.close()
 
-#shortcut of write(file, '')
+#shortcut for write(file, '')
 def clear(file):
     write(file, '')
