@@ -12,7 +12,7 @@ might also crypt messages.
 Installing
 ----------
 
-Go to http://www.python.org/download/ and get, at least, the 3.0 version. Since Pyside only has a binary install for 32bits 
+Go to http://www.python.org/download/ and get, at least, the 3.0 version. Since Pyside only has a binary setup for 32bits 
 (at least on Windows), you might prefer to install the 32bits version of Python3 instead of the 64bits even with a compatible computer.
 
 If you want to use the graphic interface, you'll also need to install PySide. Go to http://qt-project.org/wiki/PySideDownloads, 
