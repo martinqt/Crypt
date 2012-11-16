@@ -3,11 +3,13 @@ from itertools import product
 from key import *
 import os, sys
 
-frequency = False
+outputFormat = ''
 
 for arg in sys.argv:
-	if arg == '--frequency':
-		frequency = True
+    if arg == '--frequency':
+        outputFormat = 'frequency'
+    if arg == '--percent':
+        outputFormat = 'percent'
 
 #the encrypted message
 input = read('input.txt')
@@ -19,7 +21,7 @@ groups = product(''.join(charList), repeat=2)
 replaceDict = getKey()
 
 #generate and write groups analysis
-doGroupsAnalysis(input, groups, frequency)
+doGroupsAnalysis(input, groups, outputFormat)
 
 #replacing chars using the key
 result = transform(input, replaceDict)
@@ -34,4 +36,4 @@ print(result)
 #write output
 write('output/output.txt', result)
 write('output/output.html', htmlResult)
-writeCharCount(input, frequency)
+writeCharCount(input, outputFormat)

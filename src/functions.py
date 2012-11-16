@@ -21,15 +21,17 @@ def asort(dict, descending = True, fromKey = False):
             return tmp
 
 #count the number of each char in the string
-def getCharCount(string, frequency = False):
+def getCharCount(string, outputFormat = ''):
     tmp = dict()
 
     for i in string:
         if not i in tmp:
-            if not frequency:
+            if outputFormat == '':
                 tmp[i] = string.count(i)
-            else:
+            elif outputFormat == 'frequency':
                 tmp[i] = string.count(i)/len(string)
+            else:
+                tmp[i] = string.count(i)/len(string)*100
 
     return tmp
 
@@ -47,8 +49,8 @@ def getCharList(input):
     return chars
 
 #write the char count into a file
-def writeCharCount(input, frequency = False, file = 'output/chars.txt'):
-    split = asort(getCharCount(input, frequency))
+def writeCharCount(input, outputFormat = '', file = 'output/chars.txt'):
+    split = asort(getCharCount(input, outputFormat))
     content = ''
 
     for key, value in split:
