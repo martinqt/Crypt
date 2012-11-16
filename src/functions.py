@@ -67,7 +67,7 @@ def htmlFormatDict(dict, smart = True):
             else:
                 dict[i] = '<span style="color: red;">'+i+'</span>'
         else:
-            dict[i] = '<span style="color: green;">'+dict[i]+'</span>'
+            dict[i] = '<span style="color: blue;">'+dict[i]+'</span>'
 
     return dict
 
