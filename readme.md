@@ -43,7 +43,7 @@ All the results are published under the ``output`` dir.
 Options
 #######
 
-* ```` for count output
+* `` `` for count output
 * ``--frequency`` for frequency output
 * ``--percent`` for percent output (groups currently bot supported)
 
