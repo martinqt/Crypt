@@ -64,7 +64,7 @@ def fileWatcher():
                 files = list(getPyFiles())
                 sleepy += 1
 
-        if sleepy > 2400:
+        if sleepy > 100:
             sleepy = 0
             printSleepy()
 

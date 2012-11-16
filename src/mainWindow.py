@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
         self.clearModel()
         key = getKey()
         if self.frequency.checkState() == Qt.Checked:
-            charCount = getCharCount(read(self.inputPath), True)
+            charCount = getCharCount(read(self.inputPath), 'frequency')
         else:
             charCount = getCharCount(read(self.inputPath))
 
