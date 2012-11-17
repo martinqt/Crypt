@@ -52,3 +52,6 @@ GUI Mode
 
 To use the graphical interface, simply run the ``crypt.bat`` file on Windows or type ``python src/mainWindow.py`` in 
 a command prompt.
+
+
+Icons are coming from here http://www.iconspedia.com/pack/super-mono-icons-4022/
