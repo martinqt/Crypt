@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, csv, fileinput
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Crypt')
         self.headers = ['From', 'To', 'Count']
         self.inputPath = 'input.txt'
+        self.input = read(self.inputPath)
         self.keyPath = 'src/key.py'
 
         self.quit = QPushButton('Quit', self)
@@ -117,6 +118,13 @@ class MainWindow(QMainWindow):
         self.generateMenu.addAction(self.htmlAct)
         self.generateMenu.addAction(self.charactersAct)
 
+        self.wordAct = QAction(QIcon('src/images/dashboard.png'), 'Word analysis',
+                self, shortcut=QKeySequence(Qt.Key_F10),
+                statusTip='Perform the word analysis', triggered=self.doWordAnalysis)
+
+        self.toolsMenu = self.menuBar().addMenu('Tools')
+        self.toolsMenu.addAction(self.wordAct)
+
     def changeOutputMode(self):
         index = self.outputMode.currentIndex()
 
@@ -135,10 +143,9 @@ class MainWindow(QMainWindow):
 
     def convert(self):
         self.saveFile()
-        input = read(self.inputPath)
         key = self.generateKey()
 
-        self.output.setText(transform(input, key))
+        self.output.setText(transform(self.input, key))
         self.statusBar().showMessage('Converted')
 
     def saveFile(self):
@@ -171,6 +178,30 @@ class MainWindow(QMainWindow):
         else:
             return string
 
+    def doWordAnalysis(self):
+        self.statusBar().showMessage('Analysing...')
+        dictWords = self.loadWords()
+        words = self.output.toPlainText().split(' ')
+        score = total = 0
+
+        for word in words:
+            length = len(word)
+            total += length
+            if word in dictWords:
+                score += length
+
+
+        print(score/total*100)
+        self.statusBar().showMessage('Done')
+
+    def loadWords(self):
+        words = list()
+
+        for line in fileinput.input(['src/dict/fr.txt']):
+            words.append(line[:-1])
+
+        return words
+
     def generateHtmlFile(self):
         writeHtmlFile()
 
@@ -178,7 +209,7 @@ class MainWindow(QMainWindow):
         write('output/output.txt', transform(read(self.inputPath), getKey()))
 
     def generateCharactersFile(self):
-        writeCharCount(read(self.inputPath), self.headers[2].lower())
+        writeCharCount(self.input, self.headers[2].lower())
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
