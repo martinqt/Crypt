@@ -102,6 +102,13 @@ class MainWindow(QMainWindow):
         self.fileMenu = self.menuBar().addMenu('File')
         self.fileMenu.addAction(self.saveAct)
 
+        self.htmlAct = QAction(QIcon('src/images/html.png'), 'HTML output',
+                self, shortcut=QKeySequence(Qt.Key_F3),
+                statusTip='Generate an HTML output file', triggered=self.generateHtmlFile)
+
+        self.generateMenu = self.menuBar().addMenu('Generate')
+        self.generateMenu.addAction(self.htmlAct)
+
     def changeOutputMode(self):
         index = self.outputMode.currentIndex()
 
@@ -155,6 +162,9 @@ class MainWindow(QMainWindow):
             return '\\'+string
         else:
             return string
+
+    def generateHtmlFile(self):
+        writeHtmlFile()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

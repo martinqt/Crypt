@@ -1,6 +1,7 @@
 from operator import itemgetter
 from collections import deque
 import os, sys
+from key import *
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from file import *
 from groups import *
@@ -70,6 +71,15 @@ def htmlFormatDict(dict, smart = True):
             dict[i] = '<span style="color: blue;">'+dict[i]+'</span>'
 
     return dict
+
+def writeHtmlFile():
+    input = read('input.txt')
+    replaceDict = getKey()
+
+    htmlResult = input+'<hr/>'
+    htmlResult += transform(input, htmlFormatDict(replaceDict))
+
+    write('output/output.html', htmlResult)
 
 #apply the dict to the input
 def transform(input, replaceDict):
