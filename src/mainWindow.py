@@ -102,11 +102,15 @@ class MainWindow(QMainWindow):
         self.fileMenu = self.menuBar().addMenu('File')
         self.fileMenu.addAction(self.saveAct)
 
-        self.htmlAct = QAction(QIcon('src/images/html.png'), 'HTML output',
+        self.outputAct = QAction(QIcon('src/images/file.png'), 'TXT output',
                 self, shortcut=QKeySequence(Qt.Key_F3),
                 statusTip='Generate an HTML output file', triggered=self.generateHtmlFile)
+        self.htmlAct = QAction(QIcon('src/images/html.png'), 'HTML output',
+                self, shortcut=QKeySequence(Qt.Key_F4),
+                statusTip='Generate the text output file', triggered=self.generateOutputFile)
 
         self.generateMenu = self.menuBar().addMenu('Generate')
+        self.generateMenu.addAction(self.outputAct)
         self.generateMenu.addAction(self.htmlAct)
 
     def changeOutputMode(self):
@@ -165,6 +169,9 @@ class MainWindow(QMainWindow):
 
     def generateHtmlFile(self):
         writeHtmlFile()
+
+    def generateOutputFile(self):
+        write('output/output.txt', transform(read(self.inputPath), getKey()))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
