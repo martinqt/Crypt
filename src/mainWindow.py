@@ -103,15 +103,19 @@ class MainWindow(QMainWindow):
         self.fileMenu.addAction(self.saveAct)
 
         self.outputAct = QAction(QIcon('src/images/file.png'), 'TXT output',
-                self, shortcut=QKeySequence(Qt.Key_F3),
-                statusTip='Generate an HTML output file', triggered=self.generateHtmlFile)
-        self.htmlAct = QAction(QIcon('src/images/html.png'), 'HTML output',
-                self, shortcut=QKeySequence(Qt.Key_F4),
+                self, shortcut=QKeySequence(Qt.Key_F6),
                 statusTip='Generate the text output file', triggered=self.generateOutputFile)
+        self.htmlAct = QAction(QIcon('src/images/html.png'), 'HTML output',
+                self, shortcut=QKeySequence(Qt.Key_F7),
+                statusTip='Generate an HTML output file', triggered=self.generateHtmlFile)
+        self.charactersAct = QAction(QIcon('src/images/file.png'), 'Characters statistics',
+                self, shortcut=QKeySequence(Qt.Key_F8),
+                statusTip='Generate a file with the characters statistics', triggered=self.generateCharactersFile)
 
         self.generateMenu = self.menuBar().addMenu('Generate')
         self.generateMenu.addAction(self.outputAct)
         self.generateMenu.addAction(self.htmlAct)
+        self.generateMenu.addAction(self.charactersAct)
 
     def changeOutputMode(self):
         index = self.outputMode.currentIndex()
@@ -172,6 +176,9 @@ class MainWindow(QMainWindow):
 
     def generateOutputFile(self):
         write('output/output.txt', transform(read(self.inputPath), getKey()))
+
+    def generateCharactersFile(self):
+        writeCharCount(read(self.inputPath), self.headers[2].lower())
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

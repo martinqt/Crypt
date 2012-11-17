@@ -27,12 +27,12 @@ def getCharCount(string, outputFormat = ''):
 
     for i in string:
         if not i in tmp:
-            if outputFormat == '':
-                tmp[i] = string.count(i)
-            elif outputFormat == 'frequency':
+            if outputFormat == 'frequency':
                 tmp[i] = string.count(i)/len(string)
-            else:
+            elif outputFormat == 'percent':
                 tmp[i] = string.count(i)/len(string)*100
+            else:
+                tmp[i] = string.count(i)
 
     return tmp
 
