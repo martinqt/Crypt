@@ -22,8 +22,11 @@ class MainWindow(QMainWindow):
         self.populateButton = QPushButton('Repopulate', self)
         self.populateButton.clicked.connect(self.populate)
 
-        self.frequency = QCheckBox('Frequency', self)
-        self.frequency.stateChanged.connect(self.toogleFrequency)
+        self.outputMode = QComboBox(self)
+        self.outputMode.addItem('Count')
+        self.outputMode.addItem('Frequency')
+        self.outputMode.addItem('Percent')
+        self.outputMode.currentIndexChanged.connect(self.changeOutputMode)
 
         self.output = QTextBrowser(self)
         self.output.setReadOnly(True)
@@ -39,7 +42,7 @@ class MainWindow(QMainWindow):
         layout.addLayout(hLayout)
 
         hLayout = QHBoxLayout()
-        hLayout.addWidget(self.frequency)
+        hLayout.addWidget(self.outputMode)
         hLayout.addWidget(self.populateButton)
         layout.addLayout(hLayout)
 
@@ -68,8 +71,10 @@ class MainWindow(QMainWindow):
         
         self.clearModel()
         key = getKey()
-        if self.frequency.checkState() == Qt.Checked:
+        if self.headers[2] == 'Frequency':
             charCount = getCharCount(read(self.inputPath), 'frequency')
+        elif self.headers[2] == 'Percent':
+            charCount = getCharCount(read(self.inputPath), 'percent')
         else:
             charCount = getCharCount(read(self.inputPath))
 
@@ -97,11 +102,15 @@ class MainWindow(QMainWindow):
         self.fileMenu = self.menuBar().addMenu('File')
         self.fileMenu.addAction(self.saveAct)
 
-    def toogleFrequency(self):
-        if self.frequency.checkState() == Qt.Checked:
+    def changeOutputMode(self):
+        index = self.outputMode.currentIndex()
+
+        if index == 0:
+            self.headers[2] = 'Count'
+        elif index == 1:
             self.headers[2] = 'Frequency'
         else:
-            self.headers[2] = 'Count'
+            self.headers[2] = 'Percent'
 
         self.applyHeader()
         self.populate()
