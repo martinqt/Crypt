@@ -59,6 +59,9 @@ class MainWindow(QMainWindow):
         self.applyHeader()
         self.keyEdit.setModel(self.model)
 
+        self.dashboardLabel = QLabel(self)
+        self.statusBar().insertPermanentWidget(0, self.dashboardLabel, 0);
+
         self.statusBar().showMessage('Welcome')
 
         self.createMenu()
@@ -191,7 +194,19 @@ class MainWindow(QMainWindow):
                 score += length
 
 
-        print(score/total*100)
+        score = score/total*100
+
+        if score < 34:
+            path = 'src/images/dashboard_red.png'
+        elif score < 67:
+            path = 'src/images/dashboard_orange.png'
+        else:
+            path = 'src/images/dashboard_green.png'
+
+        self.dashboardLabel.setPixmap(QPixmap(path))
+        self.dashboardLabel.setScaledContents(False)
+        self.dashboardLabel.setAlignment(Qt.AlignRight)
+
         self.statusBar().showMessage('Done')
 
     def loadWords(self):
