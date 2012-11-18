@@ -72,15 +72,6 @@ def htmlFormatDict(dict, smart = True):
 
     return dict
 
-def writeHtmlFile():
-    input = read('input.txt')
-    replaceDict = getKey()
-
-    htmlResult = input+'<hr/>'
-    htmlResult += transform(input, htmlFormatDict(replaceDict))
-
-    write('output/output.html', htmlResult)
-
 #apply the dict to the input
 def transform(input, replaceDict):
     return input.translate(str.maketrans(replaceDict))
