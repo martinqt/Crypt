@@ -45,7 +45,7 @@ Options
 
 * `` `` for count output
 * ``--frequency`` for frequency output
-* ``--percent`` for percent output (groups currently bot supported)
+* ``--percent`` for percent output (groups currently not supported)
 
 GUI Mode
 --------
