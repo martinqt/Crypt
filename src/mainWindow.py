@@ -203,7 +203,8 @@ class MainWindow(QMainWindow):
         else:
             path = 'src/images/dashboard_green.png'
 
-        self.dashboardLabel.setPixmap(QPixmap(path))
+        self.dashboardLabel.setToolTip(str(round(score, 1))+'%')
+        self.dashboardLabel.setPixmap(QPixmap(path).scaled(20, 20, Qt.KeepAspectRatio))
         self.dashboardLabel.setScaledContents(False)
         self.dashboardLabel.setAlignment(Qt.AlignRight)
 
