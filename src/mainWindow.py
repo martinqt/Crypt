@@ -158,7 +158,7 @@ class MainWindow(QMainWindow):
 
         for key, value in replace:
             tmp = '          \''+self.escape(key)+'\' : '
-            tmp += '\''+value+'\',\n'
+            tmp += '\''+self.escape(value)+'\',\n'
             content += tmp
 
         content += '''     }'''
