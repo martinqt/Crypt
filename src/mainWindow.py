@@ -69,6 +69,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage('Welcome')
 
         self.createMenu()
+        self.loadConfig()
         self.populate()
 
     def populate(self):
@@ -125,6 +126,9 @@ class MainWindow(QMainWindow):
         self.generateMenu.addAction(self.htmlAct)
         self.generateMenu.addAction(self.charactersAct)
 
+        self.configAct = QAction(QIcon('src/images/reload.png'), 'Reload configuration',
+                self, shortcut=QKeySequence(Qt.Key_F5),
+                statusTip='Reload the configuration', triggered=self.loadConfig)
         self.wordAct = QAction(QIcon('src/images/dashboard.png'), 'Word analysis',
                 self, shortcut=QKeySequence(Qt.Key_F10),
                 statusTip='Perform the word analysis', triggered=self.doWordAnalysis)
@@ -133,6 +137,7 @@ class MainWindow(QMainWindow):
                 statusTip='Change the options', triggered=self.showOptions)
 
         self.toolsMenu = self.menuBar().addMenu('Tools')
+        self.toolsMenu.addAction(self.configAct)
         self.toolsMenu.addAction(self.wordAct)
         self.toolsMenu.addAction(self.optionAct)
 
@@ -156,7 +161,7 @@ class MainWindow(QMainWindow):
         self.saveFile()
         key = self.generateKey()
 
-        self.output.setText(transform(self.input, htmlFormatDict(key)))
+        self.output.setText(transform(self.input, self.htmlFormatDict(key)))
         self.statusBar().showMessage('Converted')
 
     def saveFile(self):
@@ -242,6 +247,25 @@ class MainWindow(QMainWindow):
 
     def showOptions(self):
         self.options.show()
+
+    def loadConfig(self):
+        self.config = configparser.ConfigParser()
+        self.config.read('parameters.ini')
+
+    def htmlFormatDict(self, dict):
+        for i in dict:
+            if dict[i] == '-' or dict[i] == '':
+                if i == ' ':
+                    dict[i] = '<span style="color: '+self.toRgb(self.config['HTML_COLORS']['original'])+';">-</span>'
+                else:
+                    dict[i] = '<span style="color: '+self.toRgb(self.config['HTML_COLORS']['original'])+';">'+i+'</span>'
+            else:
+                dict[i] = '<span style="color: '+self.toRgb(self.config['HTML_COLORS']['converted'])+';">'+dict[i]+'</span>'
+
+        return dict
+
+    def toRgb(self, string):
+        return 'rgb('+string[:3]+', '+string[3:6]+', '+string[6:9]+')'
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
