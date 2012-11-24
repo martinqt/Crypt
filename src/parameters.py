@@ -39,8 +39,14 @@ class Parameters(QWidget):
         self.setLayout(layout)
 
         self.convertedToolButton.clicked.connect(self.convertedColorClicked)
+        self.originalToolButton.clicked.connect(self.originalColorClicked)
 
     def convertedColorClicked(self):
         pixmap = QPixmap(16, 16)
         pixmap.fill(QColorDialog.getColor())
         self.convertedToolButton.setIcon(QIcon(pixmap))
+
+    def originalColorClicked(self):
+        pixmap = QPixmap(16, 16)
+        pixmap.fill(QColorDialog.getColor())
+        self.originalToolButton.setIcon(QIcon(pixmap))
