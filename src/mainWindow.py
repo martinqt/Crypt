@@ -148,7 +148,7 @@ class MainWindow(QMainWindow):
         self.saveFile()
         key = self.generateKey()
 
-        self.output.setText(transform(self.input, key))
+        self.output.setText(transform(self.input, htmlFormatDict(key)))
         self.statusBar().showMessage('Converted')
 
     def saveFile(self):

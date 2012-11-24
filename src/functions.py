@@ -62,7 +62,7 @@ def writeCharCount(input, outputFormat = '', file = 'output/chars.txt'):
 #transform the key value to generate a colored html output
 def htmlFormatDict(dict, smart = True):
     for i in dict:
-        if smart and dict[i] == '-':
+        if smart and (dict[i] == '-' or dict[i] == ''):
             if i == ' ':
                 dict[i] = '<span style="color: red;">-</span>'
             else:
