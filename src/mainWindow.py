@@ -5,6 +5,7 @@ from PySide.QtGui import *
 from key import *
 from file import *
 from functions import *
+from parameters import *
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -13,10 +14,13 @@ class MainWindow(QMainWindow):
         self.resize(700, 500)
         self.setFont(QFont('Verdana')) 
         self.setWindowTitle('Crypt')
+
         self.headers = ['From', 'To', 'Count']
         self.inputPath = 'input.txt'
         self.input = read(self.inputPath)
         self.keyPath = 'src/key.py'
+
+        self.options = Parameters()
 
         self.quit = QPushButton('Quit', self)
         self.quit.clicked.connect(quit)
@@ -124,9 +128,13 @@ class MainWindow(QMainWindow):
         self.wordAct = QAction(QIcon('src/images/dashboard.png'), 'Word analysis',
                 self, shortcut=QKeySequence(Qt.Key_F10),
                 statusTip='Perform the word analysis', triggered=self.doWordAnalysis)
+        self.optionAct = QAction(QIcon('src/images/options.png'), 'Options',
+                self, shortcut=QKeySequence(Qt.Key_F11),
+                statusTip='Change the options', triggered=self.showOptions)
 
         self.toolsMenu = self.menuBar().addMenu('Tools')
         self.toolsMenu.addAction(self.wordAct)
+        self.toolsMenu.addAction(self.optionAct)
 
     def changeOutputMode(self):
         index = self.outputMode.currentIndex()
@@ -231,6 +239,9 @@ class MainWindow(QMainWindow):
 
     def generateCharactersFile(self):
         writeCharCount(self.input, self.headers[2].lower())
+
+    def showOptions(self):
+        self.options.show()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
