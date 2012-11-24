@@ -52,6 +52,8 @@ class Parameters(QWidget):
             self.config['HTML_COLORS']['converted'] = self.getStringFromColor(color)
             self.convertedToolButton.setIcon(QIcon(pixmap))
 
+        self.saveConfig()
+
     def originalColorClicked(self):
         pixmap = QPixmap(16, 16)
         color = QColorDialog.getColor(self.getColorFromString(self.config['HTML_COLORS']['original']), self, 'Original Color')
@@ -59,6 +61,8 @@ class Parameters(QWidget):
             pixmap.fill(color)
             self.config['HTML_COLORS']['original'] = self.getStringFromColor(color)
             self.originalToolButton.setIcon(QIcon(pixmap))
+
+        self.saveConfig()
 
     def loadConfig(self):
         self.config = configparser.ConfigParser()
@@ -87,3 +91,8 @@ class Parameters(QWidget):
             b = '0'+b
 
         return r+g+b
+
+    def saveConfig(self):
+        configFile = open('parameters.ini', 'w')
+        self.config.write(configFile)
+        configFile.close()
