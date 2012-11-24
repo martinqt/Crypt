@@ -219,11 +219,10 @@ class MainWindow(QMainWindow):
         return words
 
     def generateHtmlFile(self):
-        input = read('input.txt')
         replaceDict = self.generateKey()
 
-        htmlResult = input+'<hr/>'
-        htmlResult += transform(input, htmlFormatDict(replaceDict))
+        htmlResult = self.input+'<hr/>'
+        htmlResult += transform(self.input, htmlFormatDict(replaceDict))
 
         write('output/output.html', htmlResult)
 
