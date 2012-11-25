@@ -28,6 +28,7 @@ class Parameters(QWidget):
 
         self.saveButton.clicked.connect(self.saveConfig)
 
+    #create the general tab
     def buildGeneralTab(self):
         self.generalTab = QWidget(self)
         layout = QVBoxLayout()
@@ -40,6 +41,7 @@ class Parameters(QWidget):
         self.inputPathFieldTool.clicked.connect(self.inputPathToolClicked)
         self.inputPathField.editingFinished.connect(self.inputPathEdited)
 
+    #build the paths group of the general tab
     def buildPathsGroup(self):
         widget = QWidget(self)
         self.inputPathField = QLineEdit(self.config['PATHS']['input-path'], self)
@@ -120,6 +122,7 @@ class Parameters(QWidget):
     def getColorFromString(self, string):
         return QColor(int(string[:3]), int(string[3:6]), int(string[6:9]))
 
+    #get a string from a color object
     def getStringFromColor(self, color):
         r = str(color.red())
         if len(r) == 1:

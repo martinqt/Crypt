@@ -152,6 +152,7 @@ class MainWindow(QMainWindow):
         self.toolsMenu.addAction(self.wordAct)
         self.toolsMenu.addAction(self.optionAct)
 
+    #change the output mode by handling the combo box
     def changeOutputMode(self):
         index = self.outputMode.currentIndex()
 
@@ -165,9 +166,11 @@ class MainWindow(QMainWindow):
         self.applyHeader()
         self.populate()
 
+    #update the table header
     def applyHeader(self):
         self.model.setHorizontalHeaderLabels(self.headers)
 
+    #apply the replacement key and display the output
     def convert(self):
         self.saveFile()
         key = self.generateKey()
@@ -175,6 +178,7 @@ class MainWindow(QMainWindow):
         self.output.setText(transform(self.input, self.htmlFormatDict(key)))
         self.statusBar().showMessage('Converted')
 
+    #write the key to a python file
     def saveFile(self):
         replace = asort(self.generateKey(), False, True)
         content = '''def getKey():
@@ -189,6 +193,7 @@ class MainWindow(QMainWindow):
 
         write(self.keyPath, content)
 
+    #generate the key from the table
     def generateKey(self):
         key = dict()
 
@@ -199,12 +204,14 @@ class MainWindow(QMainWindow):
 
         return key
 
+    #escape the ` character for the key file
     def escape(self, string):
         if string == '\'':
             return '\\'+string
         else:
             return string
 
+    #handle the word analysis process
     def doWordAnalysis(self):
         self.statusBar().showMessage('Analysing...')
         dictWords = self.loadWords()
@@ -234,6 +241,7 @@ class MainWindow(QMainWindow):
 
         self.statusBar().showMessage('Done')
 
+    #load the word dictionnary
     def loadWords(self):
         words = list()
 
@@ -251,19 +259,24 @@ class MainWindow(QMainWindow):
 
         write('output/output.html', htmlResult)
 
+    #write the txt output file
     def generateOutputFile(self):
         write('output/output.txt', transform(self.input, getKey()))
 
+    #write the char analysis
     def generateCharactersFile(self):
         writeCharCount(self.input, self.headers[2].lower())
 
+    #display the option window
     def showOptions(self):
         self.options.show()
 
+    #load the config file
     def loadConfig(self):
         self.config = configparser.ConfigParser()
         self.config.read('parameters.ini')
 
+    #prepare the replacement key fro html display
     def htmlFormatDict(self, dict):
         for i in dict:
             if dict[i] == '-' or dict[i] == '':
@@ -276,6 +289,7 @@ class MainWindow(QMainWindow):
 
         return dict
 
+    #transform a color string into a css compliant rgb format
     def toRgb(self, string):
         return 'rgb('+string[:3]+', '+string[3:6]+', '+string[6:9]+')'
 
