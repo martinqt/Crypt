@@ -55,6 +55,7 @@ class Parameters(QWidget):
         self.tabs.addTab(self.generalTab, 'General')
 
         self.inputPathFieldTool.clicked.connect(self.inputPathToolClicked)
+        self.inputPathField.editingFinished.connect(self.inputPathEdited)
 
     #build the html color group of the general tab
     def buildHtmlColorGroup(self):
@@ -79,6 +80,11 @@ class Parameters(QWidget):
 
         return group
 
+    #update the config when the line edit content change
+    def inputPathEdited(self):
+        self.config['PATHS']['input-path'] = self.inputPathField.text()
+
+    #show a dialog to help selecting the input
     def inputPathToolClicked(self):
         filename = QFileDialog.getOpenFileName(self, 'Select input file', '', 'Text (*.txt)')[0]
         self.inputPathField.setText(filename)
