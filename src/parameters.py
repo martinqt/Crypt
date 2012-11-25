@@ -32,7 +32,15 @@ class Parameters(QWidget):
         self.generalTab = QWidget(self)
         layout = QVBoxLayout()
         layout.addWidget(self.buildHtmlColorGroup())
+        layout.addWidget(self.buildPathsGroup())
 
+        self.generalTab.setLayout(layout)
+        self.tabs.addTab(self.generalTab, 'General')
+
+        self.inputPathFieldTool.clicked.connect(self.inputPathToolClicked)
+        self.inputPathField.editingFinished.connect(self.inputPathEdited)
+
+    def buildPathsGroup(self):
         widget = QWidget(self)
         self.inputPathField = QLineEdit(self.config['PATHS']['input-path'], self)
         self.inputPathFieldTool = QToolButton(self)
@@ -49,13 +57,8 @@ class Parameters(QWidget):
 
         group = QGroupBox('Paths', self)
         group.setLayout(formLayout)
-        layout.addWidget(group)
 
-        self.generalTab.setLayout(layout)
-        self.tabs.addTab(self.generalTab, 'General')
-
-        self.inputPathFieldTool.clicked.connect(self.inputPathToolClicked)
-        self.inputPathField.editingFinished.connect(self.inputPathEdited)
+        return group
 
     #build the html color group of the general tab
     def buildHtmlColorGroup(self):
