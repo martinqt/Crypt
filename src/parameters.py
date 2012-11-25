@@ -19,9 +19,14 @@ class Parameters(QWidget):
 
         self.buildGeneralTab()
 
+        self.saveButton = QPushButton('Save', self)
+
         layout = QVBoxLayout()
         layout.addWidget(self.tabs)
+        layout.addWidget(self.saveButton)
         self.setLayout(layout)
+
+        self.saveButton.clicked.connect(self.saveConfig)
 
     def buildGeneralTab(self):
         self.generalTab = QWidget(self)
@@ -75,7 +80,9 @@ class Parameters(QWidget):
         return group
 
     def inputPathToolClicked(self):
-        filename = QFileDialog.getOpenFileName(self, 'Select input file', '', 'Text (*.txt)')
+        filename = QFileDialog.getOpenFileName(self, 'Select input file', '', 'Text (*.txt)')[0]
+        self.inputPathField.setText(filename)
+        self.config['PATHS']['input-path'] = filename
 
     #change the converted color option
     def convertedColorClicked(self):
@@ -86,8 +93,6 @@ class Parameters(QWidget):
             self.config['HTML_COLORS']['converted'] = self.getStringFromColor(color)
             self.convertedToolButton.setIcon(QIcon(pixmap))
 
-        self.saveConfig()
-
     #change the original color option
     def originalColorClicked(self):
         pixmap = QPixmap(16, 16)
@@ -96,8 +101,6 @@ class Parameters(QWidget):
             pixmap.fill(color)
             self.config['HTML_COLORS']['original'] = self.getStringFromColor(color)
             self.originalToolButton.setIcon(QIcon(pixmap))
-
-        self.saveConfig()
 
     #load the config file
     def loadConfig(self):
