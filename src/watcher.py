@@ -1,7 +1,7 @@
 from subprocess import *
 import os, time, sys
 
-#get the python files in a dir
+#get the Python files in a dir
 def getPyFiles(paths = ['src', 'src/functions'], files = ['input.txt']):
     for dir in paths:
         for elmt in os.listdir(dir):
@@ -11,7 +11,7 @@ def getPyFiles(paths = ['src', 'src/functions'], files = ['input.txt']):
     for file in files:
         yield [file, getModificationTime(file)]
 
-#get the modification yime of the file
+#get the modification time of the file
 def getModificationTime(file):
     return os.stat(file).st_mtime
 
