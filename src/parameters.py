@@ -11,10 +11,48 @@ class Parameters(QWidget):
         self.resize(300, 150)
 
         self.loadConfig()
+        self.buildUi()
 
-        self.tab1 = QWidget(self)
+    #build the ui
+    def buildUi(self):
+        self.tabs = QTabWidget(self)
+
+        self.buildGeneralTab()
+
         layout = QVBoxLayout()
+        layout.addWidget(self.tabs)
+        self.setLayout(layout)
 
+    def buildGeneralTab(self):
+        self.generalTab = QWidget(self)
+        layout = QVBoxLayout()
+        layout.addWidget(self.buildHtmlColorGroup())
+
+        widget = QWidget(self)
+        self.inputPathField = QLineEdit(self.config['PATHS']['input-path'], self)
+        self.inputPathFieldTool = QToolButton(self)
+        self.inputPathFieldTool.setIcon(QIcon(QPixmap('src/images/folder.png')))
+
+        tmpLayout = QHBoxLayout()
+        tmpLayout.setContentsMargins(0, 0, 0, 0)
+        tmpLayout.addWidget(self.inputPathField)
+        tmpLayout.addWidget(self.inputPathFieldTool)
+        widget.setLayout(tmpLayout)
+        
+        formLayout = QFormLayout()
+        formLayout.addRow('Input:', widget)
+
+        group = QGroupBox('Paths', self)
+        group.setLayout(formLayout)
+        layout.addWidget(group)
+
+        self.generalTab.setLayout(layout)
+        self.tabs.addTab(self.generalTab, 'General')
+
+        self.inputPathFieldTool.clicked.connect(self.inputPathToolClicked)
+
+    #build the html color group of the general tab
+    def buildHtmlColorGroup(self):
         self.convertedToolButton = QToolButton(self)
         pixmap = QPixmap(16, 16)
         pixmap.fill(QColor(0, 0, 255))
@@ -31,19 +69,15 @@ class Parameters(QWidget):
         group = QGroupBox('HTML color', self)
         group.setLayout(formLayout)
 
-        layout.addWidget(group)
-        self.tab1.setLayout(layout)
-
-        self.tabs = QTabWidget(self)
-        self.tabs.addTab(self.tab1, 'General')
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.tabs)
-        self.setLayout(layout)
-
         self.convertedToolButton.clicked.connect(self.convertedColorClicked)
         self.originalToolButton.clicked.connect(self.originalColorClicked)
 
+        return group
+
+    def inputPathToolClicked(self):
+        filename = QFileDialog.getOpenFileName(self, 'Select input file', '', 'Text (*.txt)')
+
+    #change the converted color option
     def convertedColorClicked(self):
         pixmap = QPixmap(16, 16)
         color = QColorDialog.getColor(self.getColorFromString(self.config['HTML_COLORS']['converted']), self, 'Converted Color')
@@ -54,6 +88,7 @@ class Parameters(QWidget):
 
         self.saveConfig()
 
+    #change the original color option
     def originalColorClicked(self):
         pixmap = QPixmap(16, 16)
         color = QColorDialog.getColor(self.getColorFromString(self.config['HTML_COLORS']['original']), self, 'Original Color')
@@ -64,10 +99,12 @@ class Parameters(QWidget):
 
         self.saveConfig()
 
+    #load the config file
     def loadConfig(self):
         self.config = configparser.ConfigParser()
         self.config.read('parameters.ini')
 
+    #convert a string to a color object
     def getColorFromString(self, string):
         return QColor(int(string[:3]), int(string[3:6]), int(string[6:9]))
 
@@ -92,6 +129,7 @@ class Parameters(QWidget):
 
         return r+g+b
 
+    #save the config file
     def saveConfig(self):
         configFile = open('parameters.ini', 'w')
         self.config.write(configFile)
