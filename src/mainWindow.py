@@ -178,7 +178,7 @@ class MainWindow(QMainWindow):
     def saveFile(self):
         replace = asort(self.generateKey(), False, True)
         content = '''def getKey():
-     return {\n'''
+    return {\n'''
 
         for key, value in replace:
             tmp = '          \''+self.escape(key)+'\' : '
@@ -242,7 +242,7 @@ class MainWindow(QMainWindow):
 
         return words
 
-    #generate and write the html ouput file
+    #generate and write the html output file
     def generateHtmlFile(self):
         replaceDict = self.generateKey()
 

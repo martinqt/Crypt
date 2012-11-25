@@ -8,13 +8,13 @@ from groups import *
 
 #sort a dict, keeping the key => value association
 def asort(dict, descending = True, fromKey = False):
-     if not fromKey:
+    if not fromKey:
         tmp = sorted(dict.items(), key=lambda x: x[1])
         if descending:
             return tmp[::-1]
         else:
             return tmp
-     else:
+    else:
         tmp = sorted(dict.items(), key=lambda x: x[0])
         if descending:
             return tmp[::-1]

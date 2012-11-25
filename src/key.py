@@ -1,5 +1,5 @@
 def getKey():
-     return {
+    return {
           ' ' : 'i',
           '\'' : 'm',
           ',' : 'f',
