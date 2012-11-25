@@ -73,6 +73,10 @@ class MainWindow(QMainWindow):
         self.createMenu()
         self.populate()
 
+    #reload the stored input
+    def reloadInput(self):
+        self.input = read(self.inputPath)
+
     #populate the key table view
     def populate(self):
         try:
@@ -132,6 +136,9 @@ class MainWindow(QMainWindow):
         self.configAct = QAction(QIcon('src/images/reload.png'), 'Reload configuration',
                 self, shortcut=QKeySequence(Qt.Key_F5),
                 statusTip='Reload the configuration', triggered=self.loadConfig)
+        self.inputAct = QAction(QIcon('src/images/reload.png'), 'Reload input',
+                self, shortcut=QKeySequence(Qt.Key_F9),
+                statusTip='Reload the input file', triggered=self.reloadInput)
         self.wordAct = QAction(QIcon('src/images/dashboard.png'), 'Word analysis',
                 self, shortcut=QKeySequence(Qt.Key_F10),
                 statusTip='Perform the word analysis', triggered=self.doWordAnalysis)
@@ -141,6 +148,7 @@ class MainWindow(QMainWindow):
 
         self.toolsMenu = self.menuBar().addMenu('Tools')
         self.toolsMenu.addAction(self.configAct)
+        self.toolsMenu.addAction(self.inputAct)
         self.toolsMenu.addAction(self.wordAct)
         self.toolsMenu.addAction(self.optionAct)
 
@@ -234,6 +242,7 @@ class MainWindow(QMainWindow):
 
         return words
 
+    #generate and write the html ouput file
     def generateHtmlFile(self):
         replaceDict = self.generateKey()
 
