@@ -14,11 +14,13 @@ class MainWindow(QMainWindow):
         self.resize(700, 500)
         self.setFont(QFont('Verdana')) 
         self.setWindowTitle('Crypt')
+        
+        self.loadConfig()
 
         self.headers = ['From', 'To', 'Count']
-        self.inputPath = 'input.txt'
+        self.inputPath = self.config['PATHS']['input-path']
         self.input = read(self.inputPath)
-        self.keyPath = 'src/key.py'
+        self.keyPath = self.config['PATHS']['key-path']
 
         self.options = Parameters()
 
@@ -69,9 +71,9 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage('Welcome')
 
         self.createMenu()
-        self.loadConfig()
         self.populate()
 
+    #populate the key table view
     def populate(self):
         try:
             self.model.itemChanged.disconnect(self.convert)
@@ -81,11 +83,11 @@ class MainWindow(QMainWindow):
         self.clearModel()
         key = getKey()
         if self.headers[2] == 'Frequency':
-            charCount = getCharCount(read(self.inputPath), 'frequency')
+            charCount = getCharCount(self.input, 'frequency')
         elif self.headers[2] == 'Percent':
-            charCount = getCharCount(read(self.inputPath), 'percent')
+            charCount = getCharCount(self.input, 'percent')
         else:
-            charCount = getCharCount(read(self.inputPath))
+            charCount = getCharCount(self.input)
 
         for i in key:
             if charCount[i] < 10:
@@ -98,6 +100,7 @@ class MainWindow(QMainWindow):
         self.keyEdit.sortByColumn(2, Qt.DescendingOrder)
         self.model.itemChanged.connect(self.convert)
         self.convert()
+
 
     def clearModel(self):
         self.model.clear();
@@ -240,7 +243,7 @@ class MainWindow(QMainWindow):
         write('output/output.html', htmlResult)
 
     def generateOutputFile(self):
-        write('output/output.txt', transform(read(self.inputPath), getKey()))
+        write('output/output.txt', transform(self.input, getKey()))
 
     def generateCharactersFile(self):
         writeCharCount(self.input, self.headers[2].lower())
