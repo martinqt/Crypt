@@ -94,8 +94,12 @@ class MainWindow(QMainWindow):
             charCount = getCharCount(self.input)
 
         for i in key:
-            if charCount[i] < 10:
-                charCount[i] = '0'+str(charCount[i])
+            if i in charCount:
+                if charCount[i] < 10:
+                    charCount[i] = '0'+str(charCount[i])
+            else:
+                charCount[i] = '00'
+
             index = self.model.rowCount()
             self.model.setItem(index, 0, QStandardItem(i))
             self.model.setItem(index, 1, QStandardItem(key[i]))
@@ -145,12 +149,16 @@ class MainWindow(QMainWindow):
         self.optionAct = QAction(QIcon('src/images/options.png'), 'Options',
                 self, shortcut=QKeySequence(Qt.Key_F11),
                 statusTip='Change the options', triggered=self.showOptions)
+        self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
+                self, shortcut=QKeySequence(Qt.Key_F12),
+                statusTip='Add a row at the end of the table', triggered=self.addRow)
 
         self.toolsMenu = self.menuBar().addMenu('Tools')
         self.toolsMenu.addAction(self.configAct)
         self.toolsMenu.addAction(self.inputAct)
         self.toolsMenu.addAction(self.wordAct)
         self.toolsMenu.addAction(self.optionAct)
+        self.toolsMenu.addAction(self.rowAct)
 
     #change the output mode by handling the combo box
     def changeOutputMode(self):
@@ -292,6 +300,10 @@ class MainWindow(QMainWindow):
     #transform a color string into a css compliant rgb format
     def toRgb(self, string):
         return 'rgb('+string[:3]+', '+string[3:6]+', '+string[6:9]+')'
+
+    #add a row at the end of the table view
+    def addRow(self):
+        self.model.insertRow(self.model.rowCount(), QStandardItem(''))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
