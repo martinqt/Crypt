@@ -149,16 +149,19 @@ class MainWindow(QMainWindow):
         self.optionAct = QAction(QIcon('src/images/options.png'), 'Options',
                 self, shortcut=QKeySequence(Qt.Key_F11),
                 statusTip='Change the options', triggered=self.showOptions)
-        self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
-                self, shortcut=QKeySequence(Qt.Key_F12),
-                statusTip='Add a row at the end of the table', triggered=self.addRow)
 
         self.toolsMenu = self.menuBar().addMenu('Tools')
         self.toolsMenu.addAction(self.configAct)
         self.toolsMenu.addAction(self.inputAct)
         self.toolsMenu.addAction(self.wordAct)
         self.toolsMenu.addAction(self.optionAct)
-        self.toolsMenu.addAction(self.rowAct)
+
+        self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
+                self, shortcut=QKeySequence(Qt.Key_F12),
+                statusTip='Add a row at the end of the table', triggered=self.addRow)
+
+        self.keyMenu = self.menuBar().addMenu('Key')
+        self.keyMenu.addAction(self.rowAct)
 
     #change the output mode by handling the combo box
     def changeOutputMode(self):
