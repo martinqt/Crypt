@@ -1,4 +1,4 @@
-import sys, os, fileinput
+import sys, os
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -6,6 +6,7 @@ from key import *
 from file import *
 from functions import *
 from parameters import *
+from cryptWindow import *
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -23,6 +24,7 @@ class MainWindow(QMainWindow):
         self.keyPath = self.config['PATHS']['key-path']
 
         self.options = Parameters()
+        self.crypt = CryptWindow()
 
         self.quit = QPushButton('Quit', self)
         self.quit.clicked.connect(quit)
@@ -313,4 +315,4 @@ class MainWindow(QMainWindow):
         self.model.insertRow(self.model.rowCount(), QStandardItem(''))
 
     def showCryptWindow(self):
-        print('')
+        self.crypt.show()
