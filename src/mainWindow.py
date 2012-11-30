@@ -157,7 +157,7 @@ class MainWindow(QMainWindow):
         self.toolsMenu.addAction(self.optionAct)
 
         self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
-                self, shortcut=QKeySequence(Qt.Key_F12),
+                self, shortcut=QKeySequence(Qt.Key_A),
                 statusTip='Add a row at the end of the table', triggered=self.addRow)
 
         self.keyMenu = self.menuBar().addMenu('Key')
