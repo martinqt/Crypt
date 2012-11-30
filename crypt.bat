@@ -1,1 +1,1 @@
-python src/mainWindow.py
+python main.py

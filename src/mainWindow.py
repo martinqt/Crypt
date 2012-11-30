@@ -1,4 +1,4 @@
-import sys, os, csv, fileinput
+import sys, os, fileinput
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -118,9 +118,13 @@ class MainWindow(QMainWindow):
         self.saveAct = QAction(QIcon('src/images/save.png'), 'Save',
                 self, shortcut=QKeySequence.Save,
                 statusTip='Save the key', triggered=self.saveFile)
+        self.cryptAct = QAction(QIcon('src/images/lock.png'), 'Crypt',
+                self, shortcut=QKeySequence(Qt.Key_C),
+                statusTip='Crypt a message with the curent key', triggered=self.showCryptWindow)
 
         self.fileMenu = self.menuBar().addMenu('File')
         self.fileMenu.addAction(self.saveAct)
+        self.fileMenu.addAction(self.cryptAct)
 
         self.outputAct = QAction(QIcon('src/images/file.png'), 'TXT output',
                 self, shortcut=QKeySequence(Qt.Key_F6),
@@ -308,8 +312,5 @@ class MainWindow(QMainWindow):
     def addRow(self):
         self.model.insertRow(self.model.rowCount(), QStandardItem(''))
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    mainwindow = MainWindow()
-    mainwindow.show()
-    sys.exit(app.exec_())
+    def showCryptWindow(self):
+        print('')
