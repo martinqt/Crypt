@@ -165,9 +165,13 @@ class MainWindow(QMainWindow):
         self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
                 self, shortcut=QKeySequence(Qt.Key_A),
                 statusTip='Add a row at the end of the table', triggered=self.addRow)
+        self.updateKeyAct = QAction(QIcon('src/images/reload.png'), 'Update key',
+                self, shortcut=QKeySequence(Qt.Key_U),
+                statusTip='Update the key with the current input', triggered=self.updateKey)
 
         self.keyMenu = self.menuBar().addMenu('Key')
         self.keyMenu.addAction(self.rowAct)
+        self.keyMenu.addAction(self.updateKeyAct)
 
     #change the output mode by handling the combo box
     def changeOutputMode(self):
@@ -311,8 +315,23 @@ class MainWindow(QMainWindow):
         return 'rgb('+string[:3]+', '+string[3:6]+', '+string[6:9]+')'
 
     #add a row at the end of the table view
-    def addRow(self):
-        self.model.insertRow(self.model.rowCount(), QStandardItem(''))
+    def addRow(self, char = ''):
+        self.model.insertRow(self.model.rowCount(), QStandardItem(char))
 
     def showCryptWindow(self):
         self.crypt.show()
+
+    def updateKey(self):
+        charList = getCharList(self.input)
+        curentChars = list()
+        i = 0
+        rowCount = self.model.rowCount()
+
+        while i < rowCount:
+            curentChars.append(self.model.item(i).text())
+            i += 1
+
+        diffs = list(set(charList) - set(curentChars))
+
+        for diff in diffs:
+            self.addRow(diff)
