@@ -31,9 +31,11 @@ class CryptWindow(QMainWindow):
         self.config = configparser.ConfigParser()
         self.config.read('parameters.ini')
 
+    #apply the transformation key
     def crypt(self):
         key = self.invertKey(getKey())
         self.textOutput.setText(transform(self.textInput.toPlainText(), key))
 
+    #invert the key/value of the key
     def invertKey(self, key):
         return {v:k for k, v in key.items()}
