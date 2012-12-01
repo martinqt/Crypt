@@ -6,8 +6,7 @@ way of using it is welcome.
 
 This has been tested with the 3.3 version of python on a windows 7 laptop.
 
-This is currently not intended to decrypt multiple messages but only the one in the input file. In the future it 
-might also crypt messages.
+It is also able to crypt messages.
 
 Installing
 ----------
