@@ -1,8 +1,8 @@
 import configparser
 from PySide.QtCore import *
 from PySide.QtGui import *
-from key import *
-from functions import *
+from src.key import *
+from src.functions import *
 
 class CryptWindow(QMainWindow):
     def __init__(self, parent=None):

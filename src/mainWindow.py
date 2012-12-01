@@ -2,11 +2,10 @@ import sys, os
 sys.path.insert(0, os.getcwd()+'/src/functions')
 from PySide.QtCore import *
 from PySide.QtGui import *
-from key import *
-from file import *
-from functions import *
-from parameters import *
-from cryptWindow import *
+from src.key import *
+from src.lib.file import *
+from src.parameters import *
+from src.cryptWindow import *
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):

@@ -1,10 +1,8 @@
 from operator import itemgetter
 from collections import deque
-import os, sys
-from key import *
-sys.path.insert(0, os.getcwd()+'/src/functions')
-from file import *
-from groups import *
+from src.key import *
+from src.lib.file import *
+from src.lib.groups import *
 
 #sort a dict, keeping the key => value association
 def asort(dict, descending = True, fromKey = False):
