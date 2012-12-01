@@ -220,7 +220,17 @@ class MainWindow(QMainWindow):
 
         i = 0
         while i < self.model.rowCount():
-            key[self.model.item(i, 0).text()] = self.model.item(i, 1).text()
+            try:
+                keyStr = self.model.item(i, 0).text()
+            except AttributeError:
+                keyStr = ''
+            try:
+                valueStr = self.model.item(i, 1).text()
+            except AttributeError:
+                valueStr = ''
+
+            key[keyStr] = valueStr
+
             i += 1
 
         return key
