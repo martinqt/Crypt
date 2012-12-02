@@ -1,5 +1,3 @@
-import sys, os
-sys.path.insert(0, os.getcwd()+'/src/functions')
 from PySide.QtCore import *
 from PySide.QtGui import *
 from src.key import *
