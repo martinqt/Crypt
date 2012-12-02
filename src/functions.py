@@ -50,14 +50,14 @@ def getCharList(input):
     return chars
 
 #write the char count into a file
-def writeCharCount(input, outputFormat = '', file = 'output/chars.txt'):
+def writeCharCount(input, outputFormat = '', filename = 'output/chars.txt'):
     split = asort(getCharCount(input, outputFormat))
     content = ''
 
     for key, value in split:
         content += '\n'+str(key)+' => '+str(value)
     
-    write(file, content)
+    write(filename, content)
 
 #transform the key value to generate a colored html output
 def htmlFormatDict(dict, smart = True):

@@ -25,11 +25,11 @@ def getGroupsCount(content, groups, frequency = False):
             yield [group, result]
 
 #generate and write groups analysis
-def doGroupsAnalysis(input, groups, frequency = False, file = 'output/groups.txt'):
-    clear(file)
+def doGroupsAnalysis(input, groups, frequency = False, filename = 'output/groups.txt'):
+    clear(filename)
     sortedGroups = getSortedGroupsCount(input, groups, frequency)
 
     for i, j in sortedGroups:
-        append(file, '\n'+str(i)+' => '+str(j))
+        append(filename, '\n'+str(i)+' => '+str(j))
 
-    append(file, '\n \n'+str(len(sortedGroups))+' groups')
+    append(filename, '\n \n'+str(len(sortedGroups))+' groups')
