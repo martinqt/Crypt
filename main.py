@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 import sys
 from src.mainWindow import *
 

@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 from src.functions import *
 from itertools import product
 from src.key import *

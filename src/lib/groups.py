@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 from ..functions import *
 
 #get the sorted result of getGroupsCount()

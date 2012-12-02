@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 def getKey():
     return {
           ' ' : 'i',

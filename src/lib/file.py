@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 #write the content into the file
 def write(file, content):
     file = open(file, 'w')

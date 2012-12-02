@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 from operator import itemgetter
 from collections import deque
 from src.key import *

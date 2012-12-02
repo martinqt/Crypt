@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 import configparser
 from PySide.QtCore import *
 from PySide.QtGui import *

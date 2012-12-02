@@ -1,3 +1,5 @@
+# -*-coding:Utf-8 -*
+
 from PySide.QtCore import *
 from PySide.QtGui import *
 from src.key import *
@@ -199,7 +201,9 @@ class MainWindow(QMainWindow):
     #write the key to a python file
     def saveFile(self):
         replace = asort(self.generateKey(), False, True)
-        content = '''def getKey():
+        content = '''# -*-coding:Utf-8 -*
+
+def getKey():
     return {\n'''
 
         for key, value in replace:
