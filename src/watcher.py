@@ -2,7 +2,7 @@ from subprocess import *
 import os, time, sys
 
 #get the Python files in a dir
-def getPyFiles(paths = ['src', 'lib/functions'], files = ['input.txt']):
+def getPyFiles(paths = ['src', 'src/lib'], files = ['input.txt']):
     for dir in paths:
         for elmt in os.listdir(dir):
             if elmt.endswith(".py"):
