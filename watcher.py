@@ -2,18 +2,18 @@ from subprocess import *
 import os, time, sys
 
 #get the Python files in a dir
-def getPyFiles(paths = ['src', 'src/lib'], files = ['input.txt']):
-    for dir in paths:
-        for elmt in os.listdir(dir):
+def getPyFiles(paths = ['src', 'src/lib'], files = ['input.txt', 'watcher.py', 'script.py']):
+    for directory in paths:
+        for elmt in os.listdir(directory):
             if elmt.endswith(".py"):
-                yield [dir+'/'+elmt, getModificationTime(dir+'/'+elmt)]
+                yield [directory+'/'+elmt, getModificationTime(directory+'/'+elmt)]
 
-    for file in files:
-        yield [file, getModificationTime(file)]
+    for filename in files:
+        yield [filename, getModificationTime(filename)]
 
 #get the modification time of the file
-def getModificationTime(file):
-    return os.stat(file).st_mtime
+def getModificationTime(filename):
+    return os.stat(filename).st_mtime
 
 #print the sleepy snoring fox
 def printSleepy():
@@ -40,7 +40,7 @@ def fileWatcher():
     while 1:
         for elmt in files:
             if elmt[1] != getModificationTime(elmt[0]):
-                if str(elmt[0]) == 'src/watcher.py':
+                if str(elmt[0]) == 'watcher.py':
                     print('********** Please restart the watcher \n \n')
                     elmt[1] = getModificationTime(elmt[0])
 
@@ -48,7 +48,7 @@ def fileWatcher():
                     print('***** Processing *****')
                     
                     if outputFormat == '':
-                        call(['python', 'src/script.py'])
+                        call(['python', 'script.py'])
                     elif outputFormat == 'frequency':
                         call(['python', 'src/script.py', '--frequency'])
                     else:

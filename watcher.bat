@@ -1,1 +1,1 @@
-python src/watcher.py %1 
+python watcher.py %1 
