@@ -1,4 +1,4 @@
-from functions import *
+from ..functions import *
 
 #get the sorted result of getGroupsCount()
 def getSortedGroupsCount(content, groups, frequency = False):
