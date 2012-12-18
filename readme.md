@@ -18,9 +18,6 @@ If you want to use the graphic interface, you'll also need to install PySide. Go
 select your OS and then the PySide version corresponding to your Python version. The version is at the end of the filename, for 
 instance ``-py3.2`` or ``-py3.3``.
 
-If you are under Windows, look at the download section (https://github.com/martinqt/Crypt/downloads) and get the ``deps.zip`` archive.
-It contains the installations files for both Python and PySide.
-
 CLI Mode
 --------
 
