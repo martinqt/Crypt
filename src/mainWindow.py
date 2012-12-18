@@ -164,6 +164,9 @@ class MainWindow(QMainWindow):
         self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
                 self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_A),
                 statusTip='Add a row at the end of the table', triggered=self.addRow)
+        self.rowAct = QAction(QIcon('src/images/remove.png'), 'Remove row',
+                self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_D),
+                statusTip='Delete the current row', triggered=self.deleteRow)
         self.updateKeyAct = QAction(QIcon('src/images/reload.png'), 'Update key',
                 self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_U),
                 statusTip='Update the key with the current input', triggered=self.updateKey)
@@ -328,6 +331,10 @@ def getKey():
     #add a row at the end of the table view
     def addRow(self, char = ''):
         self.model.insertRow(self.model.rowCount(), QStandardItem(char))
+
+    def deleteRow(self):
+        index = QInputDialog.getInt(self, 'Enter the row index', 'Index:', 1, 1, self.model.rowCount()+1, 1)[0]-1
+        self.model.removeRows(index, 1)
 
     def showCryptWindow(self):
         self.crypt.show()
