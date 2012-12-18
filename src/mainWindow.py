@@ -120,7 +120,7 @@ class MainWindow(QMainWindow):
                 self, shortcut=QKeySequence.Save,
                 statusTip='Save the key', triggered=self.saveFile)
         self.cryptAct = QAction(QIcon('src/images/lock.png'), 'Crypt',
-                self, shortcut=QKeySequence(Qt.Key_C),
+                self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_C),
                 statusTip='Crypt a message with the curent key', triggered=self.showCryptWindow)
 
         self.fileMenu = self.menuBar().addMenu('File')
@@ -162,10 +162,10 @@ class MainWindow(QMainWindow):
         self.toolsMenu.addAction(self.optionAct)
 
         self.rowAct = QAction(QIcon('src/images/add.png'), 'Add row',
-                self, shortcut=QKeySequence(Qt.Key_A),
+                self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_A),
                 statusTip='Add a row at the end of the table', triggered=self.addRow)
         self.updateKeyAct = QAction(QIcon('src/images/reload.png'), 'Update key',
-                self, shortcut=QKeySequence(Qt.Key_U),
+                self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_U),
                 statusTip='Update the key with the current input', triggered=self.updateKey)
 
         self.keyMenu = self.menuBar().addMenu('Key')
