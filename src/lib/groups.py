@@ -1,6 +1,7 @@
 # -*-coding:Utf-8 -*
 
 from ..functions import *
+from operator import itemgetter
 
 #get the sorted result of getGroupsCount()
 def getSortedGroupsCount(content, groups, frequency = False):
