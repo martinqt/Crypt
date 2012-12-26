@@ -170,10 +170,14 @@ class MainWindow(QMainWindow):
         self.updateKeyAct = QAction(QIcon('src/images/reload.png'), 'Update key',
                 self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_U),
                 statusTip='Update the key with the current input', triggered=self.updateKey)
+        self.clearKeyAct = QAction(QIcon('src/images/clear.png'), 'Clear key',
+                self, shortcut=QKeySequence(Qt.CTRL + Qt.Key_R),
+                statusTip='Remove all replacements', triggered=self.clearKey)
 
         self.keyMenu = self.menuBar().addMenu('Key')
         self.keyMenu.addAction(self.rowAct)
         self.keyMenu.addAction(self.updateKeyAct)
+        self.keyMenu.addAction(self.clearKeyAct)
 
     #change the output mode by handling the combo box
     def changeOutputMode(self):
@@ -353,3 +357,12 @@ def getKey():
 
         for diff in diffs:
             self.addRow(diff)
+
+    def clearKey(self):
+        i = 0
+        rowCount = self.model.rowCount()
+
+        while i < rowCount:
+            self.model.setItem(i, 1, QStandardItem('-'))
+            i += 1
+
