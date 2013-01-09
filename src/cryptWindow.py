@@ -34,7 +34,7 @@ class CryptWindow(QMainWindow):
 
     #apply the transformation key
     def crypt(self):
-        key = self.invertKey(getKey())
+        key = self.invertKey(loadKey(self.config['PATHS']['key-path']))
         self.textOutput.setText(transform(self.textInput.toPlainText(), key))
 
     #invert the key/value of the key

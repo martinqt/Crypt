@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
             pass
         
         self.clearModel()
-        key = self.loadKey()
+        key = loadKey(self.config['PATHS']['key-path'])
         if self.headers[2] == 'Frequency':
             charCount = getCharCount(self.input, 'frequency')
         elif self.headers[2] == 'Percent':
@@ -352,9 +352,3 @@ class MainWindow(QMainWindow):
         while i < rowCount:
             self.model.setItem(i, 1, QStandardItem('-'))
             i += 1
-
-    def loadKey(self):
-        with open(self.config['PATHS']['key-path'], 'rb') as fileObj:
-            key = pickle.load(fileObj)
-
-        return key

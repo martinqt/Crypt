@@ -3,6 +3,14 @@
 from collections import deque
 from src.lib.file import *
 from src.lib.groups import *
+import pickle
+
+def loadKey(path):
+    """Load the replacement key from a file"""
+    with open(path, 'rb') as fileObj:
+        key = pickle.load(fileObj)
+
+    return key
 
 #sort a dict, keeping the key => value association
 def asort(dict, descending = True, fromKey = False):
