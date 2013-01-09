@@ -18,8 +18,7 @@ class MainWindow(QMainWindow):
         self.loadConfig()
 
         self.headers = ['From', 'To', 'Count']
-        self.inputPath = self.config['PATHS']['input-path']
-        self.input = read(self.inputPath)
+        self.input = read(self.config['PATHS']['input-path'])
 
         self.options = Parameters()
         self.crypt = CryptWindow()
@@ -75,7 +74,7 @@ class MainWindow(QMainWindow):
 
     #reload the stored input
     def reloadInput(self):
-        self.input = read(self.inputPath)
+        self.input = read(self.config['PATHS']['input-path'])
 
     #populate the key table view
     def populate(self):
