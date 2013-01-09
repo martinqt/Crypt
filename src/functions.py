@@ -1,7 +1,6 @@
 # -*-coding:Utf-8 -*
 
 from collections import deque
-from src.key import *
 from src.lib.file import *
 from src.lib.groups import *
 

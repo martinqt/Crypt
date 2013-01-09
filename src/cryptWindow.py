@@ -3,7 +3,6 @@
 import configparser
 from PySide.QtCore import *
 from PySide.QtGui import *
-from src.key import *
 from src.functions import *
 
 class CryptWindow(QMainWindow):

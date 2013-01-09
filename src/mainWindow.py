@@ -2,10 +2,10 @@
 
 from PySide.QtCore import *
 from PySide.QtGui import *
-from src.key import *
 from src.lib.file import *
 from src.parameters import *
 from src.cryptWindow import *
+import pickle
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -20,7 +20,6 @@ class MainWindow(QMainWindow):
         self.headers = ['From', 'To', 'Count']
         self.inputPath = self.config['PATHS']['input-path']
         self.input = read(self.inputPath)
-        self.keyPath = self.config['PATHS']['key-path']
 
         self.options = Parameters()
         self.crypt = CryptWindow()
@@ -86,7 +85,7 @@ class MainWindow(QMainWindow):
             pass
         
         self.clearModel()
-        key = getKey()
+        key = self.loadKey()
         if self.headers[2] == 'Frequency':
             charCount = getCharCount(self.input, 'frequency')
         elif self.headers[2] == 'Percent':
@@ -207,20 +206,8 @@ class MainWindow(QMainWindow):
 
     #write the key to a python file
     def saveFile(self):
-        replace = asort(self.generateKey(), False, True)
-        content = '''# -*-coding:Utf-8 -*
-
-def getKey():
-    return {\n'''
-
-        for key, value in replace:
-            tmp = '          \''+self.escape(key)+'\' : '
-            tmp += '\''+self.escape(value)+'\',\n'
-            content += tmp
-
-        content += '''     }'''
-
-        write(self.keyPath, content)
+        with open(self.config['PATHS']['key-path'], 'wb') as fileObj:
+            pickle.dump(self.generateKey(), fileObj)
 
     #generate the key from the table
     def generateKey(self):
@@ -366,3 +353,8 @@ def getKey():
             self.model.setItem(i, 1, QStandardItem('-'))
             i += 1
 
+    def loadKey(self):
+        with open(self.config['PATHS']['key-path'], 'rb') as fileObj:
+            key = pickle.load(fileObj)
+
+        return key
