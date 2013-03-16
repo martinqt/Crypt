@@ -1,6 +1,8 @@
 import pickle
 from operator import itemgetter
+from itertools import product
 import re
+import random
 
 #read the content of the file
 def read(file):
@@ -90,3 +92,20 @@ def buildKey(left, right):
         i += 1
 
     return key
+
+def evaluate(text, table):
+    groups = list(product(''.join(getCharList(text)), repeat=2))
+    analysis = doGroupsAnalysis(text, groups)
+    score = 1
+
+    for elmt in analysis:
+        a = [x for x in table if elmt[0] in x[0]]
+        if a == list():
+            score = score*elmt[1]*0.2
+        else:
+            score = score*elmt[1]*a[0][1]/10
+
+    return score
+
+def randomSwap(right):
+    pass
