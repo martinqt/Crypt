@@ -87,7 +87,7 @@ def buildKey(left, right):
     key = dict()
     i = 0
 
-    while i < len(left):
+    while i < len(right):
         key[left[i]] = right[i]
         i += 1
 
@@ -101,11 +101,15 @@ def evaluate(text, table):
     for elmt in analysis:
         a = [x for x in table if elmt[0] in x[0]]
         if a == list():
-            score = score*elmt[1]*0.2
+            score = score*elmt[1]*0.1
         else:
-            score = score*elmt[1]*a[0][1]/10
+            score = score*elmt[1]*a[0][1]
 
     return score
 
 def randomSwap(right):
-    pass
+    a = random.randint(0, len(right)-1)
+    b = random.randint(0, len(right)-1)
+    right[a], right[b] = right[b], right[a]
+
+    return right
