@@ -7,18 +7,6 @@ import sys
 ###### The script
 table = readPickled('table.py')
 content = read('input.txt')
-try:
-    arg = sys.argv[1]
-except IndexError:
-    arg = ''
-if arg == '--continue':
-    print('Restoring previous session...')
-    sys.stdout.flush()
-    key = readPickled('key.py')
-else:
-    print('Starting new session')
-    sys.stdout.flush()
-    key = dict()
 groups = list(product(''.join(getCharList(content)), repeat=2))
 failRow = printcounter = 0
 score = pscore = 1
@@ -33,6 +21,20 @@ for group in groups:
 right = list(left)
 pright = list(right)
 alpha = 0
+
+try:
+    arg = sys.argv[1]
+except IndexError:
+    arg = ''
+if arg == '--continue':
+    print('Restoring previous session...')
+    sys.stdout.flush()
+    key = readPickled('key.py')
+    right = list(key.values())
+else:
+    print('Starting new session')
+    sys.stdout.flush()
+    key = dict()
 
 print('Here we go!!!')
 sys.stdout.flush()
@@ -71,6 +73,9 @@ sys.stdout.flush()
 print(alpha)
 key = buildKey(left, right)
 writePickled('key.py', key)
-print(transform(content, key))
+tmp = transform(content, key)
+write('output.txt', tmp)
+print(tmp)
 
 print('And saved (hopefully ;)')
+print('Ps: Never said I found the answer ;)')

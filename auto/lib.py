@@ -9,8 +9,14 @@ def read(file):
     file = open(file, 'r')
     content = file.read()
     file.close()
-    
+
     return content
+
+#write the content into the file
+def write(file, content):
+    file = open(file, 'w')
+    file.write(content)
+    file.close()
 
 def writePickled(filename, content):
     """Write a pickled file"""
