@@ -40,22 +40,17 @@ print('Here we go!!!')
 sys.stdout.flush()
 
 while failRow < 1000:
-    #print(right)
     right = randomSwap(right)
-    #print(right)
     key = buildKey(left, right)
-    #print(key)
     text = transform(content, key)
     score = evaluate(text, table)
 
     if score > pscore:
-        #print('better')
         pscore = score
         pright = list(right)
         failRow = 0
         alpha += 1
     else:
-        #print('worst')
         right = list(pright)
         failRow += 1
 
@@ -75,7 +70,7 @@ key = buildKey(left, right)
 writePickled('key.py', key)
 tmp = transform(content, key)
 write('output.txt', tmp)
-print(tmp)
+print('\n'+tmp)
 
-print('And saved (hopefully ;)')
+print('\n \nAnd saved (hopefully ;)')
 print('Ps: Never said I found the answer ;)')
