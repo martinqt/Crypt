@@ -2,35 +2,38 @@
 
 from itertools import product
 from lib import *
-import sys
+import sys, itertools
 
 ###### The script
 table = readPickled('table.py')
 content = read('input.txt')
 groups = list(product(''.join(getCharList(content)), repeat=2))
 failRow = printcounter = 0
-score = pscore = 1
+score = pscore = evaluate(content, table)
 #left is the coded side
 pright = left = right = list()
+#left = getCharList(content)
+left = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',\
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',',\
+    '.', '\'', '?', '!', ' ']
 
 #groups = ['1a', 'bc', 'de', 'fg']
 
-for group in groups:
-    left.append(''.join(group))
+#for group in groups:
+#    left.append(''.join(group))
 
 right = list(left)
 pright = list(right)
-alpha = 0
+same = best = worth = 0
 
 try:
-    arg = sys.argv[1]
+    cont = sys.argv[1]
 except IndexError:
-    arg = ''
-if arg == '--continue':
+    cont = ''
+if cont == '--continue':
     print('Restoring previous session...')
     sys.stdout.flush()
-    key = readPickled('key.py')
-    right = list(key.values())
+    right = readPickled('right.py')
 else:
     print('Starting new session')
     sys.stdout.flush()
@@ -39,38 +42,47 @@ else:
 print('Here we go!!!')
 sys.stdout.flush()
 
-while failRow < 1000:
+failTarget = 1000
+
+#Main loop
+
+while failRow < failTarget:
     right = randomSwap(right)
     key = buildKey(left, right)
     text = transform(content, key)
     score = evaluate(text, table)
 
-    if score > pscore:
+    if score == pscore:
+        same += 1
+    elif score > pscore:
         pscore = score
         pright = list(right)
         failRow = 0
-        alpha += 1
+        best += 1
     else:
         right = list(pright)
         failRow += 1
+        worth += 1
 
     if (printcounter == 200):
-        key = buildKey(left, right)
-        writePickled('key.py', key)
-        print('Not dead... yet anyway^^ ('+str(failRow)+'/1000)')
+        writePickled('right.py', list(right))
+        print('Not dead... yet anyway ^^ ('+str(failRow)+'/'+str(failTarget)+')')
         sys.stdout.flush()
         printcounter = 0
     printcounter += 1
-
+#Post process
 print('Compleeeeeeeeeeeeeeeted (at last :)')
 sys.stdout.flush()
 
-print(alpha)
+print('Same: '+str(same)+'\nBest: '+str(best)+'\nWorth: '+str(worth))
+writePickled('right.py', right)
 key = buildKey(left, right)
-writePickled('key.py', key)
 tmp = transform(content, key)
 write('output.txt', tmp)
+score = evaluate(tmp, table)
+write('score.txt', str(score))
 print('\n'+tmp)
-
 print('\n \nAnd saved (hopefully ;)')
-print('Ps: Never said I found the answer ;)')
+print('Ps: Never said I found the answer ;)\n')
+
+print(buildKey(left, right))

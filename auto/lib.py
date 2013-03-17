@@ -57,6 +57,7 @@ def getSortedGroupsCount(content, groups):
 
 #count the number of each group
 def getGroupsCount(content, groups):
+    length = len(content)
     for elmt in groups:
         group = ''.join(elmt)
 
@@ -71,7 +72,7 @@ def doGroupsAnalysis(input, groups):
     sortedGroups = getSortedGroupsCount(input, groups)
 
     for i, j in sortedGroups:
-        result.append((str(i), j))
+        result.append((str(i), round(j, 3)))
 
     return result
 
@@ -93,7 +94,7 @@ def buildKey(left, right):
     key = dict()
     i = 0
 
-    while i < len(right):
+    while i < len(left):
         key[left[i]] = right[i]
         i += 1
 
@@ -107,7 +108,8 @@ def evaluate(text, table):
     for elmt in analysis:
         a = [x for x in table if elmt[0] in x[0]]
         if a == list():
-            score = score*elmt[1]*0.1
+            #score = score*elmt[1]*0.1
+            pass
         else:
             score = score*elmt[1]*a[0][1]
 
@@ -118,4 +120,19 @@ def randomSwap(right):
     b = random.randint(0, len(right)-1)
     right[a], right[b] = right[b], right[a]
 
-    return right
+    return list(right)
+
+#count the number of each char in the string
+def getCharCount(string, outputFormat = ''):
+    tmp = dict()
+
+    for i in string:
+        if not i in tmp:
+            if outputFormat == 'frequency':
+                tmp[i] = string.count(i)/len(string)
+            elif outputFormat == 'percent':
+                tmp[i] = string.count(i)/len(string)*100
+            else:
+                tmp[i] = string.count(i)
+
+    return tmp
