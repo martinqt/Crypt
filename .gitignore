@@ -4,3 +4,4 @@ output/
 .pydevproject
 key.py
 *.pyc
+out
