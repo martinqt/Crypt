@@ -74,7 +74,7 @@ while failRow < failTarget:
 print('Compleeeeeeeeeeeeeeeted (at last :)')
 sys.stdout.flush()
 
-print('Same: '+str(same)+'\nBest: '+str(best)+'\nWorth: '+str(worth))
+print('Same: '+str(same)+'\nBetter: '+str(best)+'\nWorth: '+str(worth))
 writePickled('right.py', right)
 key = buildKey(left, right)
 tmp = transform(content, key)
