@@ -12,15 +12,9 @@ failRow = printcounter = 0
 score = pscore = evaluate(content, table)
 #left is the coded side
 pright = left = right = list()
-#left = getCharList(content)
 left = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',\
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',',\
-    '.', '\'', '?', '!', ' ']
-
-#groups = ['1a', 'bc', 'de', 'fg']
-
-#for group in groups:
-#    left.append(''.join(group))
+    '.', '\'', '?', '!', ' ', ';', '#', '1', '2']
 
 right = list(left)
 pright = list(right)
@@ -70,17 +64,17 @@ while failRow < failTarget:
         sys.stdout.flush()
         printcounter = 0
     printcounter += 1
+
 #Post process
 print('Compleeeeeeeeeeeeeeeted (at last :)')
 sys.stdout.flush()
 
 print('Same: '+str(same)+'\nBetter: '+str(best)+'\nWorth: '+str(worth))
+print('Iteration: '+str(same+best+worth))
 writePickled('right.py', right)
 key = buildKey(left, right)
 tmp = transform(content, key)
 write('output.txt', tmp)
-score = evaluate(tmp, table)
-write('score.txt', str(score))
 print('\n'+tmp)
 print('\n \nAnd saved (hopefully ;)')
 print('Ps: Never said I found the answer ;)\n')

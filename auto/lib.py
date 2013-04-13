@@ -32,7 +32,7 @@ def readPickled(path):
 
 #apply the key to the content
 def transform(content, key):
-    rep = dict((re.escape(k), v) for k, v in key.iteritems())
+    rep = dict((re.escape(k), v) for k, v in key.items())
     pattern = re.compile("|".join(rep.keys()))
     text = pattern.sub(lambda m: rep[re.escape(m.group(0))], content)
 
@@ -53,7 +53,8 @@ def getSortedGroupsCount(content, groups):
     for i,j in list(getGroupsCount(content, groups)):
         tmpGroups.append([i, j])
 
-    return sorted(tmpGroups, key=itemgetter(1))[::-1]
+    return tmpGroups
+    #return sorted(tmpGroups, key=itemgetter(1))[::-1]
 
 #count the number of each group
 def getGroupsCount(content, groups):
@@ -76,8 +77,8 @@ def doGroupsAnalysis(input, groups):
 
     return result
 
-#return the list of the chars present in the string
 def getCharList(input):
+    """Return the list of the chars present in the string."""
     chars = list()
 
     for char in input:
@@ -89,6 +90,7 @@ def getCharList(input):
     return chars
 
 def buildKey(left, right):
+    """Build the replacement key."""
     import sys
 
     key = dict()
@@ -101,6 +103,7 @@ def buildKey(left, right):
     return key
 
 def evaluate(text, table):
+    """Compute the text's score."""
     groups = list(product(''.join(getCharList(text)), repeat=2))
     analysis = doGroupsAnalysis(text, groups)
     score = 1
@@ -108,22 +111,22 @@ def evaluate(text, table):
     for elmt in analysis:
         a = [x for x in table if elmt[0] in x[0]]
         if a == list():
-            #score = score*elmt[1]*0.1
-            pass
+            score = score*elmt[1]*0.01
         else:
             score = score*elmt[1]*a[0][1]
 
     return score
 
 def randomSwap(right):
+    """Randomly randomly swap two elements of the list."""
     a = random.randint(0, len(right)-1)
     b = random.randint(0, len(right)-1)
     right[a], right[b] = right[b], right[a]
 
     return list(right)
 
-#count the number of each char in the string
 def getCharCount(string, outputFormat = ''):
+    """Count the number of each char in the string."""
     tmp = dict()
 
     for i in string:
