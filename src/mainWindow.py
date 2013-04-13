@@ -6,6 +6,7 @@ from src.lib.file import *
 from src.parameters import *
 from src.cryptWindow import *
 import pickle
+import fileinput
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
